@@ -1,1558 +1,1907 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr" class="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Révision Bac Français</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #F7F5F0;
-    --bg-card: #FFFFFF;
-    --bg-subtle: #F0EDE6;
-    --bg-hover: #EAE6DD;
-    --text: #1A1814;
-    --text-muted: #6B6459;
-    --text-hint: #A39A8E;
-    --border: rgba(26,24,20,0.1);
-    --border-md: rgba(26,24,20,0.16);
-    --accent: #C84B1F;
-    --accent-light: #FEF0EB;
-    --badge-blue: #1D4ED8; --badge-blue-bg: #EFF6FF;
-    --badge-green: #15803D; --badge-green-bg: #F0FDF4;
-    --badge-purple: #7C3AED; --badge-purple-bg: #F5F3FF;
-    --badge-amber: #B45309; --badge-amber-bg: #FFFBEB;
-    --badge-rose: #BE185D; --badge-rose-bg: #FFF1F2;
-    --badge-teal: #0F766E; --badge-teal-bg: #F0FDFA;
-    --badge-gray: #374151; --badge-gray-bg: #F9FAFB;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
-    --shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
-    --shadow-lg: 0 12px 32px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.05);
-    --radius: 10px;
-    --radius-sm: 6px;
-    --radius-lg: 16px;
-    --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
-  }
-  [data-theme="dark"] {
-    --bg: #111009;
-    --bg-card: #1C1A15;
-    --bg-subtle: #252118;
-    --bg-hover: #2D2921;
-    --text: #F0ECE4;
-    --text-muted: #A39A8E;
-    --text-hint: #6B6459;
-    --border: rgba(240,236,228,0.08);
-    --border-md: rgba(240,236,228,0.14);
-    --accent: #E8693F;
-    --accent-light: #2A1A12;
-    --badge-blue: #93C5FD; --badge-blue-bg: #172554;
-    --badge-green: #86EFAC; --badge-green-bg: #14532D;
-    --badge-purple: #C4B5FD; --badge-purple-bg: #2E1065;
-    --badge-amber: #FCD34D; --badge-amber-bg: #451A03;
-    --badge-rose: #FDA4AF; --badge-rose-bg: #4C0519;
-    --badge-teal: #5EEAD4; --badge-teal-bg: #042F2E;
-    --badge-gray: #D1D5DB; --badge-gray-bg: #1F2937;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-    --shadow: 0 4px 12px rgba(0,0,0,0.35);
-    --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    transition: background var(--transition), color var(--transition);
-    line-height: 1.6;
-  }
-  /* HEADER */
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  .header-inner {
-    max-width: 1100px; margin: 0 auto;
-    padding: 0 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 60px; gap: 16px;
-  }
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-weight: 700; font-size: 1.15rem;
-    color: var(--text); text-decoration: none;
-    letter-spacing: -0.02em;
-    white-space: nowrap;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .logo-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent);
-    display: inline-block;
-  }
-  .header-right { display: flex; align-items: center; gap: 10px; }
-  .search-wrap {
-    position: relative; display: flex; align-items: center;
-  }
-  .search-wrap svg {
-    position: absolute; left: 10px;
-    width: 15px; height: 15px;
-    color: var(--text-hint); pointer-events: none;
-    stroke: currentColor; fill: none;
-  }
-  #search {
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 12px 7px 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    color: var(--text);
-    width: 200px;
-    transition: all var(--transition);
-    outline: none;
-  }
-  #search::placeholder { color: var(--text-hint); }
-  #search:focus { border-color: var(--accent); width: 260px; background: var(--bg-card); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); }
-  .theme-btn {
-    width: 36px; height: 36px; border-radius: 8px;
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition); color: var(--text-muted);
-    flex-shrink: 0;
-  }
-  .theme-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-md); }
-  .theme-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; }
-  /* NAV */
-  nav {
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-  }
-  .nav-inner {
-    max-width: 1100px; margin: 0 auto;
-    padding: 0 24px;
-    display: flex; gap: 2px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .nav-inner::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    display: flex; align-items: center; gap: 7px;
-    padding: 12px 16px;
-    border: none; background: transparent;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem; font-weight: 500;
-    color: var(--text-muted);
-    cursor: pointer; white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: all var(--transition);
-    position: relative;
-  }
-  .tab-btn:hover { color: var(--text); }
-  .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
-  .tab-icon { font-size: 1rem; }
-  /* MAIN */
-  main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
-  .section { display: none; animation: fadeSlide 0.3s ease both; }
-  .section.active { display: block; }
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  /* SEARCH RESULTS */
-  #search-results { display: none; }
-  #search-results.active { display: block; }
-  /* PAGE TITLE */
-  .page-header { margin-bottom: 32px; }
-  .page-title {
-    font-family: 'Fraunces', serif;
-    font-size: 2rem; font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  .page-title em { font-style: italic; color: var(--accent); }
-  .page-subtitle { color: var(--text-muted); font-size: 0.9rem; }
-  /* SECTION HEADER */
-  .section-label {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 20px; margin-top: 40px;
-  }
-  .section-label:first-child { margin-top: 0; }
-  .section-label h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem; font-weight: 500;
-    letter-spacing: -0.02em; color: var(--text);
-  }
-  .section-era {
-    font-size: 0.72rem; font-weight: 500;
-    padding: 3px 9px; border-radius: 20px;
-    background: var(--bg-subtle); color: var(--text-muted);
-    border: 1px solid var(--border);
-    letter-spacing: 0.03em;
-  }
-  /* CARD GRID */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-    margin-bottom: 8px;
-  }
-  .card-grid.tight { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  /* CARD */
-  .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    transition: all var(--transition);
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--card-accent, var(--accent));
-    opacity: 0;
-    transition: opacity var(--transition);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-  .card:hover {
-    box-shadow: var(--shadow);
-    border-color: var(--border-md);
-    transform: translateY(-2px);
-  }
-  .card:hover::before { opacity: 1; }
-  .card-head {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 12px; margin-bottom: 12px;
-  }
-  .card-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem; font-weight: 500;
-    letter-spacing: -0.02em; color: var(--text);
-    line-height: 1.3;
-  }
-  .badge {
-    font-size: 0.68rem; font-weight: 500;
-    padding: 3px 8px; border-radius: 20px;
-    white-space: nowrap; flex-shrink: 0;
-    letter-spacing: 0.02em;
-  }
-  .badge-blue { background: var(--badge-blue-bg); color: var(--badge-blue); }
-  .badge-green { background: var(--badge-green-bg); color: var(--badge-green); }
-  .badge-purple { background: var(--badge-purple-bg); color: var(--badge-purple); }
-  .badge-amber { background: var(--badge-amber-bg); color: var(--badge-amber); }
-  .badge-rose { background: var(--badge-rose-bg); color: var(--badge-rose); }
-  .badge-teal { background: var(--badge-teal-bg); color: var(--badge-teal); }
-  .badge-gray { background: var(--badge-gray-bg); color: var(--badge-gray); }
-  .card-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
-  .card-indices {
-    border-top: 1px solid var(--border);
-    padding-top: 12px; margin-top: 4px;
-  }
-  .card-indices-label {
-    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.05em;
-    text-transform: uppercase; color: var(--text-hint);
-    margin-bottom: 8px;
-  }
-  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag {
-    font-size: 0.72rem;
-    background: var(--bg-subtle);
-    color: var(--text-muted);
-    padding: 3px 8px; border-radius: 6px;
-    border: 1px solid var(--border);
-  }
-  /* FIGURE CARD (figures de style) */
-  .fig-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: all var(--transition);
-  }
-  .fig-card:hover { box-shadow: var(--shadow); border-color: var(--border-md); transform: translateY(-2px); }
-  .fig-card-top {
-    padding: 18px 20px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-  }
-  .fig-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem; font-weight: 500;
-    letter-spacing: -0.02em; color: var(--text);
-    margin-bottom: 4px;
-  }
-  .fig-parens { font-size: 0.78rem; color: var(--text-hint); font-style: italic; }
-  .fig-body { padding: 14px 20px; }
-  .fig-example {
-    display: flex; gap: 10px; align-items: flex-start;
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin-bottom: 12px;
-  }
-  .fig-example-label {
-    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.05em;
-    text-transform: uppercase; color: var(--text-hint);
-    white-space: nowrap; padding-top: 1px;
-  }
-  .fig-example-text {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.9rem; color: var(--text);
-    line-height: 1.5;
-  }
-  .fig-effect-label {
-    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.05em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 6px;
-  }
-  .fig-effect-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
-  /* REGISTER CARD */
-  .reg-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    transition: all var(--transition);
-    border-left: 3px solid var(--reg-color, var(--accent));
-  }
-  .reg-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
-  .reg-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem; font-weight: 500;
-    letter-spacing: -0.02em; color: var(--text);
-    margin-bottom: 4px;
-  }
-  .reg-subtitle { font-size: 0.78rem; color: var(--text-hint); margin-bottom: 12px; }
-  .reg-section { margin-bottom: 12px; }
-  .reg-section-title {
-    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .reg-section-title.indices { color: var(--text-hint); }
-  .reg-section-title.effet { color: var(--accent); }
-  .reg-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
-  /* GRAMMAR SECTION */
-  .grammar-block {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    margin-bottom: 16px;
-    overflow: hidden;
-  }
-  .grammar-block-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px;
-    cursor: pointer;
-    border-bottom: 1px solid transparent;
-    transition: all var(--transition);
-    gap: 12px;
-  }
-  .grammar-block-header:hover { background: var(--bg-subtle); }
-  .grammar-block-header.open { border-bottom-color: var(--border); }
-  .grammar-block-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1rem; font-weight: 500;
-    letter-spacing: -0.02em; color: var(--text);
-  }
-  .grammar-block-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
-  .chevron { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-hint); transition: transform var(--transition); }
-  .chevron.open { transform: rotate(180deg); }
-  .grammar-body { padding: 16px 20px 20px; display: none; }
-  .grammar-body.open { display: block; animation: fadeSlide 0.2s ease both; }
-  .grammar-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px; margin-bottom: 12px;
-  }
-  .grammar-item {
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-  }
-  .grammar-item-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-hint); margin-bottom: 6px; }
-  .grammar-item-text { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
-  /* INFO BOXES */
-  .info-box {
-    background: var(--accent-light);
-    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin: 20px 0;
-    display: flex; gap: 10px;
-  }
-  .info-box-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-  .info-box-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
-  .info-box-text strong { color: var(--text); font-weight: 500; }
-  /* SEARCH */
-  .search-result-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 18px; margin-bottom: 10px;
-    transition: all var(--transition);
-    cursor: pointer;
-  }
-  .search-result-item:hover { box-shadow: var(--shadow-sm); border-color: var(--border-md); }
-  .sr-title { font-weight: 500; font-size: 0.9rem; color: var(--text); margin-bottom: 4px; }
-  .sr-text { font-size: 0.8rem; color: var(--text-muted); }
-  .sr-meta { display: flex; gap: 8px; margin-top: 8px; }
-  .no-results { text-align: center; padding: 48px 24px; color: var(--text-muted); font-size: 0.9rem; }
-  /* TIMELINE (movements) */
-  .era-block { margin-bottom: 48px; }
-  .era-title {
-    font-family: 'Fraunces', serif;
-    font-size: 0.75rem; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text-hint);
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .era-title::before {
-    content: '';
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent); flex-shrink: 0;
-  }
-  /* GENRE SECTION */
-  .genre-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  @media (max-width: 768px) { .genre-grid { grid-template-columns: 1fr; } }
-  .genre-col { }
-  .genre-col-title {
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-hint); margin-bottom: 12px; padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .genre-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px; margin-bottom: 10px;
-    transition: all var(--transition);
-  }
-  .genre-item:hover { box-shadow: var(--shadow-sm); }
-  .genre-item-title { font-weight: 500; font-size: 0.88rem; color: var(--text); margin-bottom: 4px; }
-  .genre-item-sub { font-size: 0.72rem; color: var(--accent); font-weight: 500; letter-spacing: 0.03em; margin-bottom: 8px; }
-  .genre-item-text { font-size: 0.79rem; color: var(--text-muted); line-height: 1.6; }
-  /* HIGHLIGHT */
-  .hl { background: color-mix(in srgb, var(--accent) 15%, transparent); border-radius: 3px; padding: 0 2px; color: var(--accent); font-style: normal; }
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 3px; }
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    .header-inner { padding: 0 16px; }
-    main { padding: 24px 16px 64px; }
-    .page-title { font-size: 1.5rem; }
-    .card-grid { grid-template-columns: 1fr; }
-    #search { width: 150px; }
-    #search:focus { width: 180px; }
-    .grammar-row { grid-template-columns: 1fr; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bac de Français 2026 - Outils & Méthodes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Variables de thèmes */
+        :root {
+            --bg-app: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent: #4f46e5;
+            --accent-hover: #4338ca;
+            --accent-light: #e0e7ff;
+            --sidebar-bg: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .dark {
+            --bg-app: #0f172a;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #818cf8;
+            --accent-hover: #6366f1;
+            --accent-light: #312e81;
+            --sidebar-bg: #1e293b;
+        }
+
+        /* Reset & Base styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 50;
+        }
+
+        .brand {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand i {
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            padding: 16px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-separator {
+            margin: 12px 16px 6px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        /* Main Content area */
+        main {
+            margin-left: 280px;
+            flex-grow: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar with Controls */
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+
+        .search-container {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: var(--accent-light);
+        }
+
+        /* Interactive Mode Toggle */
+        .eval-mode-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--accent-light);
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Content Container */
+        .content-view {
+            padding: 40px;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            flex-grow: 1;
+            display: none;
+        }
+
+        .content-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .view-header {
+            margin-bottom: 32px;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 24px;
+        }
+
+        .view-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .view-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* CARD & FLASHCARD STYLES */
+        .card {
+            position: relative;
+            perspective: 1000px;
+            border-radius: 12px;
+            min-height: 250px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .card-front {
+            display: none;
+        }
+
+        .card-back {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover .card-back {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        body.flashcard-mode .card {
+            cursor: pointer;
+        }
+
+        body.flashcard-mode .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        body.flashcard-mode .card.revealed .card-inner {
+            transform: rotateY(0deg);
+        }
+
+        body.flashcard-mode .card-front {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            color: var(--text-main);
+            padding: 24px;
+            z-index: 2;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.flashcard-mode .card-front i {
+            color: var(--accent);
+        }
+
+        body.flashcard-mode .card-front:hover {
+            background-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        body.flashcard-mode .card-back {
+            backface-visibility: hidden;
+            transform: rotateY(0deg);
+        }
+
+        body.flashcard-mode .card:hover .card-back {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--border-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        .badge-century { background-color: #fef3c7; color: #d97706; }
+        .dark .badge-century { background-color: #78350f; color: #fef3c7; }
+        .badge-genre { background-color: #dcfce7; color: #15803d; }
+        .dark .badge-genre { background-color: #064e3b; color: #dcfce7; }
+        .badge-cat { background-color: #e0e7ff; color: #4338ca; }
+        .dark .badge-cat { background-color: #1e1b4b; color: #e0e7ff; }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-details {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .indices-box, .exemples-box, .effets-box {
+            padding: 12px;
+            border-radius: 8px;
+            background-color: var(--bg-app);
+            margin-top: 8px;
+        }
+
+        .label-heading {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Stepper & Methodo */
+        .stepper { display: flex; flex-direction: column; gap: 32px; position: relative; margin-top: 20px; }
+        .stepper::before { content: ''; position: absolute; left: 28px; top: 20px; bottom: 20px; width: 4px; background-color: var(--border-color); z-index: 1; }
+        .step-item { display: flex; gap: 24px; position: relative; z-index: 2; }
+        .step-badge { width: 60px; height: 60px; border-radius: 50%; background-color: var(--accent); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); }
+        .step-content { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; flex-grow: 1; box-shadow: var(--shadow-sm); }
+        .step-title { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .step-time { font-size: 0.85rem; font-weight: 600; background-color: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 9999px; font-family: 'Inter', sans-serif; }
+        .step-text { color: var(--text-muted); line-height: 1.6; font-size: 1rem; }
+        .step-list { margin-top: 12px; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .step-list li { position: relative; padding-left: 24px; }
+        .step-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .gold-rule-box { border-left: 4px solid var(--accent); background-color: var(--accent-light); padding: 16px; border-radius: 0 8px 8px 0; margin-top: 16px; }
+        .dark .gold-rule-box { background-color: #1a1e36; }
+        .aei-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 12px; }
+        .aei-card { background-color: var(--bg-card); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .aei-letter { width: 32px; height: 32px; border-radius: 50%; background-color: var(--accent); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 8px; }
+
+        /* QUIZ STYLES */
+        .quiz-ui-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quiz-counter {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .quiz-score-badge {
+            background-color: var(--accent-light);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-weight: 700;
+        }
+
+        .quiz-question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-btn {
+            background-color: var(--bg-app);
+            border: 2px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background-color: var(--accent-light);
+            transform: translateX(4px);
+        }
+
+        .quiz-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .quiz-btn.correct {
+            background-color: #dcfce7 !important;
+            border-color: #10b981 !important;
+            color: #065f46 !important;
+        }
+
+        .quiz-btn.wrong {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b !important;
+        }
+
+        .dark .quiz-btn.correct { background-color: #064e3b !important; color: #dcfce7 !important; border-color: #10b981 !important;}
+        .dark .quiz-btn.wrong { background-color: #7f1d1d !important; color: #fee2e2 !important; border-color: #ef4444 !important;}
+
+        .quiz-next-btn {
+            margin-top: 24px;
+            padding: 14px 24px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+            display: none;
+        }
+
+        .quiz-next-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+	/* Module de Progression Style */
+        .progression-panel {
+            padding: 14px;
+            margin: 0 16px 12px 16px;
+            background: var(--bg-app);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .progression-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer; /* Montre qu'on peut cliquer */
+        }
+        .progression-header:hover {
+            opacity: 0.8;
+        }
+        .progression-checklist {
+            display: none; /* CACHÉ PAR DÉFAUT */
+            flex-direction: column;
+            gap: 6px;
+            max-height: 130px;
+            overflow-y: auto;
+            margin-top: 12px;
+            padding-right: 2px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 8px;
+        }
+        .progression-checklist.open {
+            display: flex; /* AFFICHÉ QUAND ON CLIQUE */
+        }
+        .progression-checklist::-webkit-scrollbar { width: 4px; }
+        .progression-checklist::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        .prog-label {
+            display: flex; align-items: center; gap: 8px; font-size: 0.8rem; cursor: pointer; color: var(--text-muted); font-weight: 500;
+        }
+        .prog-label input { accent-color: #10b981; cursor: pointer; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            aside { width: 70px; padding: 10px 0; }
+            .brand-title, .nav-separator, .nav-item span { display: none; }
+            .brand { justify-content: center; padding: 16px 0; }
+            main { margin-left: 70px; }
+            header { padding: 16px 20px; }
+        }
+        @media (max-width: 640px) {
+            body { flex-direction: column; }
+            aside { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .nav-links { flex-direction: row; overflow-x: auto; padding: 10px; }
+            main { margin-left: 0; }
+            .content-view { padding: 20px; }
+            header { flex-direction: column; gap: 12px; padding: 16px; }
+            .search-container { width: 100%; }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo">
-      <span class="logo-dot"></span>
-      Bac Français
-    </a>
-    <div class="header-right">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input id="search" type="text" placeholder="Rechercher…" autocomplete="off">
-      </div>
-      <button class="theme-btn" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème">
-        <svg id="icon-sun" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg id="icon-moon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-</header>
-
-<nav>
-  <div class="nav-inner" id="nav">
-    <button class="tab-btn active" data-tab="mouvements"><span class="tab-icon">🏛️</span> Mouvements</button>
-    <button class="tab-btn" data-tab="figures"><span class="tab-icon">✦</span> Figures de style</button>
-    <button class="tab-btn" data-tab="registres"><span class="tab-icon">🎭</span> Registres</button>
-    <button class="tab-btn" data-tab="grammaire"><span class="tab-icon">📐</span> Grammaire</button>
-    <button class="tab-btn" data-tab="lexique"><span class="tab-icon">📖</span> Lexique</button>
-    <button class="tab-btn" data-tab="genres"><span class="tab-icon">📚</span> Genres & Formes</button>
-  </div>
-</nav>
-
-<main>
-
-  <!-- SEARCH RESULTS -->
-  <div id="search-results" class="section"></div>
-
-  <!-- ===== MOUVEMENTS ===== -->
-  <div id="tab-mouvements" class="section active">
-    <div class="page-header">
-      <h1 class="page-title">Mouvements <em>littéraires</em></h1>
-      <p class="page-subtitle">Du XVIe siècle au XXe siècle — les grandes écoles et leurs indices de reconnaissance</p>
-    </div>
-
-    <div class="era-block">
-      <div class="era-title">XVIe – XVIIe siècle · Érudition, Instabilité et Ordre</div>
-      <div class="card-grid">
-        <div class="card" style="--card-accent: #2563EB;">
-          <div class="card-head">
-            <div class="card-title">L'Humanisme</div>
-            <span class="badge badge-blue">1530 – 1570</span>
-          </div>
-          <p class="card-desc">Mouvement fondé sur la confiance en l'être humain, la redécouverte de l'Antiquité et l'éloge du savoir. Les auteurs croient au progrès de l'Homme par l'éducation et la raison.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Éloge du savoir</span>
-              <span class="tag">Éducation</span>
-              <span class="tag">Sagesse / Nature humaine</span>
-              <span class="tag">Philosophes Antiquité</span>
-              <span class="tag">Morale</span>
+    <aside>
+        <div class="brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span class="brand-title">Bac Français 2026</span>
+        </div>
+	<div class="progression-panel">
+            <div class="progression-header" onclick="toggleProgression()">
+                <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);"><i class="fa-solid fa-chart-line"></i> Progression</span>
+                <span id="progression-percent" style="font-size: 0.9rem; font-weight: 700; color: #10b981;">0%</span>
             </div>
-          </div>
-        </div>
-        <div class="card" style="--card-accent: #7C3AED;">
-          <div class="card-head">
-            <div class="card-title">La Pléiade</div>
-            <span class="badge badge-purple">1549 – 1570 · Poésie</span>
-          </div>
-          <p class="card-desc">Groupe de poètes autour de Ronsard et Du Bellay qui cherchent à enrichir et défendre la langue française, en s'inspirant de l'Antiquité gréco-latine.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Alexandrins, odes, sonnets</span>
-              <span class="tag">Beauté féminine / amour</span>
-              <span class="tag">Immortalité de la poésie</span>
-              <span class="tag">Mythologie gréco-romaine</span>
+            <div style="width: 100%; height: 7px; background-color: var(--border-color); border-radius: 9999px; overflow: hidden;">
+                <div id="progression-bar" style="width: 0%; height: 100%; background-color: #10b981; transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);"></div>
             </div>
-          </div>
-        </div>
-        <div class="card" style="--card-accent: #B45309;">
-          <div class="card-head">
-            <div class="card-title">Le Baroque</div>
-            <span class="badge badge-amber">1580 – 1660</span>
-          </div>
-          <p class="card-desc">Mouvement qui exprime l'instabilité du monde, le passage du temps, et l'illusion des apparences. Il se caractérise par le mouvement, l'exubérance et la profusion.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Mort / illusion / déguisement</span>
-              <span class="tag">Métamorphose</span>
-              <span class="tag">Instabilité du monde</span>
-              <span class="tag">Antithèses / hyperboles</span>
+            <div class="progression-checklist" id="progression-checklist">
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="mov" onchange="saveAndRefreshProgression()"> Mouvements Littéraires</label>
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="fig" onchange="saveAndRefreshProgression()"> Figures de Style</label>
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="reg" onchange="saveAndRefreshProgression()"> Registres Littéraires</label>
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="gram" onchange="saveAndRefreshProgression()"> Grammaire & Syntaxe</label>
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="lex" onchange="saveAndRefreshProgression()"> Lexique & Vocabulaire</label>
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="comm" onchange="saveAndRefreshProgression()"> Métho Commentaire</label>
+                <label class="prog-label"><input type="checkbox" class="prog-cb" data-id="diss" onchange="saveAndRefreshProgression()"> Métho Dissertation</label>
             </div>
-          </div>
         </div>
-        <div class="card" style="--card-accent: #0F766E;">
-          <div class="card-head">
-            <div class="card-title">Le Classicisme</div>
-            <span class="badge badge-teal">1660 – 1690</span>
-          </div>
-          <p class="card-desc">Idéal de mesure, de clarté et d'équilibre. L'art classique cherche à représenter une nature idéale et à transmettre une vérité morale universelle.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Clarté et mesure</span>
-              <span class="tag">Contrôle des passions</span>
-              <span class="tag">Règles du théâtre</span>
-              <span class="tag">Maximes morales</span>
-              <span class="tag">Parallélismes / litotes</span>
+        <ul class="nav-links">
+            <li>
+                <a class="nav-item" onclick="switchTab('quiz')" style="border-left: 3px solid #eab308; background-color: rgba(234, 179, 8, 0.1);">
+                    <i class="fa-solid fa-bolt" style="color: #eab308;"></i>
+                    <span style="color: #ca8a04; font-weight: 700;">Quiz Flash</span>
+                </a>
+            </li>
+            <li class="nav-separator">Outils d'Analyse</li>
+            <li>
+                <a class="nav-item active" onclick="switchTab('mouvements')">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <span>Mouvements Littéraires</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-item" onclick="switchTab('figures')">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Figures de Style</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-item" onclick="switchTab('registres')">
+                    <i class="fa-solid fa-masks-theater"></i>
+                    <span>Registres Littéraires</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-item" onclick="switchTab('grammaire')">
+                    <i class="fa-solid fa-spell-check"></i>
+                    <span>Grammaire & Syntaxe</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-item" onclick="switchTab('lexique')">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Lexique & Vocabulaire</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-item" onclick="switchTab('genres')">
+                    <i class="fa-solid fa-feather"></i>
+                    <span>Structures & Genres</span>
+                </a>
+            </li>
+            <li class="nav-separator">Méthodologies</li>
+            <li>
+                <a class="nav-item" onclick="switchTab('metho-commentaire')" style="border-left: 3px solid #10b981;">
+                    <i class="fa-solid fa-pen-fancy" style="color: #10b981;"></i>
+                    <span style="color: #10b981; font-weight: 600;">Métho Commentaire</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-item" onclick="switchTab('metho-dissertation')" style="border-left: 3px solid #f59e0b;">
+                    <i class="fa-solid fa-scroll" style="color: #f59e0b;"></i>
+                    <span style="color: #f59e0b; font-weight: 600;">Métho Dissertation</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main>
+        <header>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher une notion, figure, effet..." oninput="handleSearch()">
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="era-block">
-      <div class="era-title">XVIIIe siècle · Le Combat d'Idées</div>
-      <div class="card-grid">
-        <div class="card" style="--card-accent: #D97706;">
-          <div class="card-head">
-            <div class="card-title">Les Lumières</div>
-            <span class="badge badge-amber">1715 – 1789</span>
-          </div>
-          <p class="card-desc">Mouvement philosophique qui fait de la raison, de la liberté et de la tolérance ses valeurs cardinales. Les philosophes luttent contre les préjugés, l'obscurantisme et l'injustice.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Critique des préjugés / religion</span>
-              <span class="tag">Éloge de la raison</span>
-              <span class="tag">Liberté / tolérance</span>
-              <span class="tag">Ironie / satire</span>
-              <span class="tag">Conte philosophique</span>
+            <div class="controls">
+                <div class="eval-mode-container">
+                    <span>🗂️ Mode Flashcards</span>
+                    <label class="switch">
+                        <input type="checkbox" id="flashcardToggle" onchange="toggleFlashcards()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <button class="btn-toggle" onclick="toggleDarkMode()" title="Changer de thème">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </header>
 
-    <div class="era-block">
-      <div class="era-title">XIXe siècle · Sensibilité, Réalité et Symboles</div>
-      <div class="card-grid">
-        <div class="card" style="--card-accent: #BE185D;">
-          <div class="card-head">
-            <div class="card-title">Le Romantisme</div>
-            <span class="badge badge-rose">1800 – 1850</span>
-          </div>
-          <p class="card-desc">Réaction contre le rationalisme des Lumières : l'individu, ses émotions et son rapport à la nature passent au premier plan. Le moi romantique est souvent mélancolique et révolté.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Omniprésence du "Je"</span>
-              <span class="tag">Mélancolie / révolte</span>
-              <span class="tag">Nature miroir de l'âme</span>
-              <span class="tag">Solitude / nuit</span>
-              <span class="tag">Registre lyrique ou tragique</span>
+        <!-- NOUVELLE VUE : QUIZ FLASH -->
+        <div id="quiz" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title" style="color: #eab308;"><i class="fa-solid fa-bolt"></i> Quiz Flash QCM</h1>
+                <p class="view-description">Plus de 50 questions pièges avec une seule bonne réponse pour te tester en conditions réelles.</p>
             </div>
-          </div>
-        </div>
-        <div class="card" style="--card-accent: #15803D;">
-          <div class="card-head">
-            <div class="card-title">Le Réalisme</div>
-            <span class="badge badge-green">1830 – 1890 · Roman</span>
-          </div>
-          <p class="card-desc">Mouvement qui cherche à représenter la réalité avec précision et objectivité, en s'intéressant à toutes les classes sociales, sans idéalisation.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Descriptions précises</span>
-              <span class="tag">Vocabulaire argent / social</span>
-              <span class="tag">Classes sociale moyenne ou basse</span>
-              <span class="tag">Réalité historique</span>
+            
+            <div class="quiz-ui-container">
+                <div class="quiz-header">
+                    <span class="quiz-counter" id="quiz-counter">Question 1/52</span>
+                    <span class="quiz-score-badge" id="quiz-score-badge">Score : 0</span>
+                </div>
+                
+                <div id="quiz-play-area">
+                    <h3 class="quiz-question-text" id="quiz-question-text">Chargement de la question...</h3>
+                    <div class="quiz-options" id="quiz-options-container">
+                        <!-- Les boutons de réponses seront injectés ici -->
+                    </div>
+                    <button class="quiz-next-btn" id="quiz-next-btn" onclick="nextQuizQuestion()">Valider & Suivant <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+
+                <div id="quiz-end-area" style="display: none; text-align: center; padding: 40px 0;">
+                    <i class="fa-solid fa-trophy" style="font-size: 4rem; color: #eab308; margin-bottom: 20px;"></i>
+                    <h2 style="font-size: 2rem; margin-bottom: 10px;">Quiz Terminé !</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-muted);">Ton score final est de <strong id="final-score" style="color: var(--accent); font-size: 1.5rem;"></strong></p>
+                    <button class="quiz-next-btn" style="display: inline-block; width: auto;" onclick="initQuiz()"><i class="fa-solid fa-rotate-right"></i> Recommencer une série</button>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="card" style="--card-accent: #7C3AED;">
-          <div class="card-head">
-            <div class="card-title">Le Parnasse</div>
-            <span class="badge badge-purple">1840 – 1890 · Poésie</span>
-          </div>
-          <p class="card-desc">Réaction contre le lyrisme romantique, les parnassiens prônent « l'art pour l'art » : la perfection formelle prime sur l'expression des sentiments.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Poésie impersonnelle</span>
-              <span class="tag">Rimes riches / formes fixes</span>
-              <span class="tag">Sculpture / peinture / archéologie</span>
+
+        <!-- RESTE DES VUES (Mouvements, Figures, etc...) INCHANGÉES -->
+        <div id="mouvements" class="content-view active">
+            <div class="view-header">
+                <h1 class="view-title">Mouvements Littéraires</h1>
+                <p class="view-description">Les grands courants esthétiques et intellectuels à travers les siècles.</p>
             </div>
-          </div>
-        </div>
-        <div class="card" style="--card-accent: #374151;">
-          <div class="card-head">
-            <div class="card-title">Le Naturalisme</div>
-            <span class="badge badge-gray">1870 – 1890 · Roman</span>
-          </div>
-          <p class="card-desc">Extension du réalisme appliquant les méthodes scientifiques à la littérature : Zola étudie l'influence du milieu social et de l'hérédité sur les comportements humains.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Vocabulaire médical / industriel</span>
-              <span class="tag">Hérédité (alcoolisme, folie)</span>
-              <span class="tag">Misère du peuple</span>
-              <span class="tag">Impact du milieu social</span>
+            <div class="grid-cards">
+
+                <div class="card" data-search="humanisme 16 xvie erudition sagesse education morale">
+                    <div class="card-header">
+                        <span class="badge badge-century">XVIe Siècle</span>
+                        <span class="badge badge-cat">Érudition & Sagesse</span>
+                    </div>
+                    <h3 class="card-title">L'Humanisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1530 - 1570)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Éloges du savoir, de l'éducation, thèmes de la sagesse, de la nature humaine, références aux philosophes de l'Antiquité, forte présence de morale.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="pleiade 16 xvie poesie sonnet alexandrin mythologie amour">
+                    <div class="card-header">
+                        <span class="badge badge-century">XVIe Siècle</span>
+                        <span class="badge badge-genre">Poésie</span>
+                    </div>
+                    <h3 class="card-title">La Pléiade <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1549 - 1570)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Poèmes en alexandrins (odes, sonnets), célébration de la beauté féminine, de l'amour, de l'immortalité de la poésie, mythologie gréco-romaine.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="baroque 17 xviie mort illusion deguisement instabilite metamorphose antithese hyperbole">
+                    <div class="card-header">
+                        <span class="badge badge-century">XVIIe Siècle</span>
+                        <span class="badge badge-cat">Instabilité & Illusion</span>
+                    </div>
+                    <h3 class="card-title">Le Baroque <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1580 - 1660)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Thèmes de la mort, de l'illusion, du déguisement, de l'instabilité du monde ; vocabulaire du mouvement et de la métamorphose ; profusion d'antithèses et d'hyperboles.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="classicisme 17 xviie ordre clarte mesure controle passions noblesse maximes litote">
+                    <div class="card-header">
+                        <span class="badge badge-century">XVIIe Siècle</span>
+                        <span class="badge badge-cat">Ordre & Mesure</span>
+                    </div>
+                    <h3 class="card-title">Le Classicisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1660 - 1690)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Recherche de la clarté et de la mesure, contrôle des passions, personnages nobles, respect strict des règles (théâtre), présence de maximes morales, figures de symétrie et litotes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="lumieres 18 xviiie critique prejuges esclavage religion raison liberte tolerance ironie satire pamphlet conte">
+                    <div class="card-header">
+                        <span class="badge badge-century">XVIIIe Siècle</span>
+                        <span class="badge badge-cat">Combat d'idées</span>
+                    </div>
+                    <h3 class="card-title">Les Lumières <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1715 - 1789)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Critique des préjugés, de l'esclavage ou de la religion ; éloge de la raison, de la liberté et de la tolérance ; utilisation fréquente de l'ironie, de la satire, ou de l'argumentation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="romantisme 19 xixe je sensibilite sentiments melancolie revolte nature solitude nuit lyrique">
+                    <div class="card-header">
+                        <span class="badge badge-century">XIXe Siècle</span>
+                        <span class="badge badge-cat">Sensibilité & Révolte</span>
+                    </div>
+                    <h3 class="card-title">Le Romantisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1800 - 1850)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Omniprésence du "Je", expression forte des sentiments (mélancolie, révolte), la nature comme miroir de l'âme, vocabulaire de la solitude et de la nuit, registre lyrique ou tragique.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="realisme 19 xixe roman descriptions precise argent affaires social classe basse moyenne">
+                    <div class="card-header">
+                        <span class="badge badge-century">XIXe Siècle</span>
+                        <span class="badge badge-genre">Roman</span>
+                    </div>
+                    <h3 class="card-title">Le Réalisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1830 - 1890)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Abondance de descriptions très précises (lieux, vêtements), vocabulaire argent/affaires/social, personnages ancrés dans une réalité historique ou une classe sociale basse/moyenne.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="parnasse 19 xixe poesie impersonnelle perfection forme rimes riches sculpture peinture archeologie">
+                    <div class="card-header">
+                        <span class="badge badge-century">XIXe Siècle</span>
+                        <span class="badge badge-genre">Poésie</span>
+                    </div>
+                    <h3 class="card-title">Le Parnasse <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1840 - 1890)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Poésie très impersonnelle (aucun sentiment intime), obsession de la perfection de la forme (rimes riches, structures fixes), thèmes de la sculpture, de la peinture ou de l'archéologie.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="naturalisme 19 xixe roman medical scientifique industrie tares heredite alcoolisme folie misere milieu social">
+                    <div class="card-header">
+                        <span class="badge badge-century">XIXe Siècle</span>
+                        <span class="badge badge-genre">Roman</span>
+                    </div>
+                    <h3 class="card-title">Le Naturalisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1870 - 1890)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Vocabulaire médical, scientifique ou de l'industrie ; description des tares héréditaires (alcoolisme, folie) ; focus sur la misère du peuple et l'impact du milieu social.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="symbolisme 19 xixe poesie paysage flou brume pluie reflets musicalite vers sonorites mystere reve correspondances sensorielles">
+                    <div class="card-header">
+                        <span class="badge badge-century">XIXe Siècle</span>
+                        <span class="badge badge-genre">Poésie</span>
+                    </div>
+                    <h3 class="card-title">Le Symbolisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1869 - 1896)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Paysages flous et fluides (brume, pluie, reflets), musicalité du vers (jeux sur les sonorités), poèmes centrés sur le mystère, le rêve et les correspondances sensorielles.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="surrealisme 20 xxe associations mots insolites absurde reve hasard ponctuation liberte forme">
+                    <div class="card-header">
+                        <span class="badge badge-century">XXe Siècle</span>
+                        <span class="badge badge-cat">Réinvention</span>
+                    </div>
+                    <h3 class="card-title">Le Surréalisme <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1919 - 1945)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Associations de mots bizarres ou absurdes (images insolites), thèmes du rêve, du hasard et du fou rire, absence de ponctuation parfois, liberté totale de la forme.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="absurde 20 xxe personnage egare repetition inutile dialogues rond incomprehension solitude ennui mort non-sens">
+                    <div class="card-header">
+                        <span class="badge badge-century">XXe Siècle</span>
+                        <span class="badge badge-cat">Crise du sens</span>
+                    </div>
+                    <h3 class="card-title">L'Absurde <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1940 - 1960)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Personnages égarés, répétitions de gestes inutiles, dialogues qui tournent en rond (incompréhension), thèmes de la solitude, de l'ennui, de la mort et du non-sens de la vie.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="nouveau roman 20 xxe descriptions objets froides ultra-detaillees deconstruction temps flashback anonyme">
+                    <div class="card-header">
+                        <span class="badge badge-century">XXe Siècle</span>
+                        <span class="badge badge-genre">Roman</span>
+                    </div>
+                    <h3 class="card-title">Le Nouveau Roman <span class="serif" style="font-size:1.1rem; opacity:0.7;">(1950 - 1970)</span></h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices d'Analyse</span>
+                            <p>Descriptions d'objets froides et ultra-détaillées, déconstruction du temps (flashbacks permanents), personnage principal anonyme ou sans identité précise.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
         </div>
-        <div class="card" style="--card-accent: #2563EB;">
-          <div class="card-head">
-            <div class="card-title">Le Symbolisme</div>
-            <span class="badge badge-blue">1869 – 1896 · Poésie</span>
-          </div>
-          <p class="card-desc">Réaction contre le naturalisme : le poète cherche à suggérer plutôt qu'à décrire, à travers les symboles, la musique des mots et les correspondances entre les sens.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Paysages flous (brume, pluie)</span>
-              <span class="tag">Musicalité du vers</span>
-              <span class="tag">Rêve / mystère</span>
-              <span class="tag">Correspondances sensorielles</span>
+
+        <div id="figures" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title">Figures de Style</h1>
+                <p class="view-description">Les procédés d'écriture à repérer et interpréter.</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div class="grid-cards">
 
-    <div class="era-block">
-      <div class="era-title">XXe siècle · Crises et Réinvention</div>
-      <div class="card-grid">
-        <div class="card" style="--card-accent: #DC2626;">
-          <div class="card-head">
-            <div class="card-title">Le Surréalisme</div>
-            <span class="badge badge-rose">1919 – 1945</span>
-          </div>
-          <p class="card-desc">Mouvement qui cherche à libérer l'inconscient et le rêve, en s'affranchissant du contrôle de la raison. L'automatisme psychique est une technique d'écriture clé.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Images bizarres / insolites</span>
-              <span class="tag">Rêve / hasard</span>
-              <span class="tag">Absence de ponctuation</span>
-              <span class="tag">Liberté de la forme</span>
+                <div class="card" data-search="hyperbole insistance exageration mourir soif extreme ridicule">
+                    <div class="card-header"><span class="badge badge-cat">L'Insistance</span></div>
+                    <h3 class="card-title">L'Hyperbole</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Mourir de soif."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle amplifie la réalité. Elle sert à traduire une émotion extrême (une immense douleur, une colère noire) ou à créer un effet comique/satirique en tournant une situation en ridicule.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="anaphore insistance repetition paris outrage brise martyrise rythme musical force obsession">
+                    <div class="card-header"><span class="badge badge-cat">L'Insistance</span></div>
+                    <h3 class="card-title">L'Anaphore</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Paris outragé ! Paris brisé ! Paris martyrisé !"</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle crée un rythme incantatoire ou musical. Elle donne de la force à un discours (effet de plaidoyer) et montre l'obsession de l'auteur ou du personnage sur un sujet précis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="accumulation gradation insistance meurs mort enterre profusion saturation tension dramatique">
+                    <div class="card-header"><span class="badge badge-cat">L'Insistance</span></div>
+                    <h3 class="card-title">L'Accumulation & Gradation</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Je me meurs, je suis mort, je suis enterré."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle crée un effet de profusion ou de saturation. La gradation accentue la tension dramatique, elle donne l'impression que la situation devient hors de contrôle (panique, colère, passion grandissante).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="comparaison analogie comme terre bleue orange imaginaire concret">
+                    <div class="card-header"><span class="badge badge-cat">L'Analogie</span></div>
+                    <h3 class="card-title">La Comparaison</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"La Terre est bleue comme une orange."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle met en relief une caractéristique en reliant le réel à l'imaginaire. Elle rend une description plus concrète, plus parlante pour le lecteur.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="metaphore analogie garcon lion poetique frappant trouble">
+                    <div class="card-header"><span class="badge badge-cat">L'Analogie</span></div>
+                    <h3 class="card-title">La Métaphore</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Ce garçon est un lion."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Plus forte que la comparaison, elle assimile directement deux réalités. Elle transforme la perception du lecteur en créant une image poétique frappante ou un trouble.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="personnification analogie vent hurle nuit decor actif vivant fantastique inquietant hostile">
+                    <div class="card-header"><span class="badge badge-cat">L'Analogie</span></div>
+                    <h3 class="card-title">La Personnification</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Le vent hurle dans la nuit."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle rend le décor actif et vivant. Elle donne souvent une atmosphère fantastique, inquiétante (ex: la nature qui devient hostile) ou poétique au texte.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="allegorie analogie mort faux idee abstraite concrete philosophique morale">
+                    <div class="card-header"><span class="badge badge-cat">L'Analogie</span></div>
+                    <h3 class="card-title">L'Allégorie</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>La Mort représentée avec sa faux.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle rend visible et concrète une idée complexe. Elle permet de mener une réflexion philosophique ou morale de manière très imagée.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="antithese opposition jour nuit conflit dechirement contradiction coeur raison injustice">
+                    <div class="card-header"><span class="badge badge-cat">L'Opposition</span></div>
+                    <h3 class="card-title">L'Antithèse</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Ici c'est le jour, là-bas c'est la nuit."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle souligne un conflit, un déchirement. Elle est parfaite pour montrer les contradictions d'un personnage (le cœur contre la raison) ou l'injustice d'une situation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="oxymore opposition obscure clarte surprise esthetique sentiments souffrance agreable">
+                    <div class="card-header"><span class="badge badge-cat">L'Opposition</span></div>
+                    <h3 class="card-title">L'Oxymore</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Une obscure clarté."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle crée un effet de surprise esthétique. Elle sert à exprimer une réalité complexe ou impossible, souvent liée aux sentiments (ex: la souffrance agréable de l'amour).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="chiasme opposition manger vivre miroir enfermement circularite inextricable equilibre">
+                    <div class="card-header"><span class="badge badge-cat">L'Opposition</span></div>
+                    <h3 class="card-title">Le Chiasme</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Il faut manger (A) pour vivre (B), et non pas vivre (B) pour manger (A)."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Il crée un effet d'enfermement, de circularité. On a l'impression d'une situation inextricable dont le personnage ne peut pas s'échapper, ou d'un équilibre parfait.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="litote attenuation hais point pudeur emotions retenir masquer cache">
+                    <div class="card-header"><span class="badge badge-cat">L'Atténuation</span></div>
+                    <h3 class="card-title">La Litote</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Va, je ne te hais point."</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle renforce la puissance du propos par la pudeur. Elle montre souvent la retenue d'un personnage qui cache des émotions tellement fortes qu'il n'ose pas les nommer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="euphemisme attenuation quitte mort adoucir brutal choc politesse peur ironique">
+                    <div class="card-header"><span class="badge badge-cat">L'Atténuation</span></div>
+                    <h3 class="card-title">L'Euphémisme</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Il nous a quittés" (pour "Il est mort").</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Il atténue le choc de la réalité. Il sert à masquer l'horreur par politesse, par peur, ou parfois de manière ironique.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="antiphrase attenuation ironie propre chambre desordre complicite critique moquer absurdite">
+                    <div class="card-header"><span class="badge badge-cat">L'Atténuation</span></div>
+                    <h3 class="card-title">L'Antiphrase <span style="font-size:1rem; opacity:0.8;">(L'Ironie)</span></h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"C'est du propre !" (devant une chambre en désordre).</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle crée une complicité avec le lecteur qui doit décoder le vrai message. Elle sert à critiquer, à se moquer ou à dénoncer une absurdité avec détachement.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="metonymie substitution verre zola boire lire logique fluide accelerer">
+                    <div class="card-header"><span class="badge badge-cat">La Substitution</span></div>
+                    <h3 class="card-title">La Métonymie</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Boire un verre", "Lire un Zola".</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle fluidifie le récit et accélère la lecture. Elle permet de focaliser l'attention sur un détail précis (ex: "les cuivres" pour les musiciens).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="periphrase substitution roi animaux lion attente jugement idealise satirique">
+                    <div class="card-header"><span class="badge badge-cat">La Substitution</span></div>
+                    <h3 class="card-title">La Périphrase</h3>
+                    <div class="card-details">
+                        <div class="exemples-box">
+                            <span class="label-heading"><i class="fa-solid fa-quote-left"></i> Exemple</span>
+                            <p>"Le roi des animaux" (le lion).</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-chart-line"></i> Effet produit</span>
+                            <p>Elle génère une attente ou apporte un jugement. Soit elle idéalise l'objet (effet mélioratif), soit elle s'en moque (effet satirique).</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
         </div>
-        <div class="card" style="--card-accent: #6B7280;">
-          <div class="card-head">
-            <div class="card-title">L'Absurde</div>
-            <span class="badge badge-gray">1940 – 1960</span>
-          </div>
-          <p class="card-desc">Courant philosophique et littéraire (Camus, Beckett, Ionesco) qui confronte l'Homme à l'absence de sens du monde et à sa propre condition mortelle.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Personnages égarés</span>
-              <span class="tag">Répétitions inutiles</span>
-              <span class="tag">Dialogues qui tournent en rond</span>
-              <span class="tag">Ennui / mort / non-sens</span>
+
+        <div id="registres" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title">Registres Littéraires</h1>
+                <p class="view-description">La tonalité générale d'un texte et son effet visé sur le lecteur.</p>
             </div>
-          </div>
-        </div>
-        <div class="card" style="--card-accent: #0F766E;">
-          <div class="card-head">
-            <div class="card-title">Le Nouveau Roman</div>
-            <span class="badge badge-teal">1950 – 1970</span>
-          </div>
-          <p class="card-desc">Rupture avec le roman traditionnel : rejet du personnage psychologique, de l'intrigue linéaire et du narrateur omniscient. L'objet prend une place centrale.</p>
-          <div class="card-indices">
-            <p class="card-indices-label">Indices de reconnaissance</p>
-            <div class="tag-list">
-              <span class="tag">Descriptions d'objets ultra-détaillées</span>
-              <span class="tag">Déconstruction du temps</span>
-              <span class="tag">Personnage anonyme / sans identité</span>
+            <div class="grid-cards">
+
+                <div class="card" data-search="lyrique sentiments je amour regret nostalgie nature fuite temps exclamations intimite partage">
+                    <div class="card-header"><span class="badge badge-cat">Tonalité</span></div>
+                    <h3 class="card-title">Le Registre Lyrique</h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices</span>
+                            <p>Omniprésence du "Je", vocabulaire des sentiments (amour, regret, nostalgie), thèmes de la nature, de la fuite du temps, exclamations.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-bullseye"></i> Ce que ça apporte</span>
+                            <p>Il crée un effet d'intimité et de partage. L'auteur cherche à toucher la sensibilité du lecteur en faisant résonner ses propres émotions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="pathetique pitie souffrance douleur misere mort victimes enfants pauvres compassion injustice">
+                    <div class="card-header"><span class="badge badge-cat">Tonalité</span></div>
+                    <h3 class="card-title">Le Registre Pathétique</h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices</span>
+                            <p>Vocabulaire de la douleur, de la misère, de la mort ; présence de victimes vulnérables (enfants, pauvres) ; phrases exclamatives.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-bullseye"></i> Ce que ça apporte</span>
+                            <p>Il cherche à susciter la compassion et la pitié. L'auteur l'utilise pour dénoncer une injustice sociale ou humaine en rendant la scène insoutenable.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="tragique destin fatalite sang mort forces depassent impasse catharsis terreur condition mortelle">
+                    <div class="card-header"><span class="badge badge-cat">Tonalité</span></div>
+                    <h3 class="card-title">Le Registre Tragique</h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices</span>
+                            <p>Vocabulaire du destin, du sang, de la mort ; personnages confrontés à des forces qui les dépassent ; absence totale d'issue.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-bullseye"></i> Ce que ça apporte</span>
+                            <p>Il provoque la terreur et la pitié (la catharsis). Il montre l'Homme face à sa condition mortelle et crée une tension dramatique maximale.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="ironique satirique critique moquerie antiphrases caricatures exagerations complicite absurde">
+                    <div class="card-header"><span class="badge badge-cat">Tonalité</span></div>
+                    <h3 class="card-title">Le Registre Ironique & Satirique</h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices</span>
+                            <p>Antiphrases, caricatures, décalages entre le ton sérieux de l'énonciation et la futilité réelle du sujet.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-bullseye"></i> Ce que ça apporte</span>
+                            <p>Il crée une complicité critique avec le lecteur. L'auteur pousse le lecteur à réfléchir et à dénoncer lui-même l'absurdité d'une situation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="polemique combat affrontement agressif nous vous anaphores hyperboles questions rhetoriques indigner">
+                    <div class="card-header"><span class="badge badge-cat">Tonalité</span></div>
+                    <h3 class="card-title">Le Registre Polémique</h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices</span>
+                            <p>Vocabulaire agressif, opposition marquée "Nous" contre "Vous", anaphores, hyperboles, questions rhétoriques.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-bullseye"></i> Ce que ça apporte</span>
+                            <p>Il transforme le texte en un terrain de combat verbal. L'auteur cherche à indigner le lecteur et à détruire la crédibilité de son adversaire.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="comique rire divertissement mots quiproquos mecaniques absurde detendre condamner defauts">
+                    <div class="card-header"><span class="badge badge-cat">Tonalité</span></div>
+                    <h3 class="card-title">Le Registre Comique</h3>
+                    <div class="card-details">
+                        <div class="indices-box">
+                            <span class="label-heading"><i class="fa-solid fa-circle-info"></i> Indices</span>
+                            <p>Jeux de mots, quiproquos, répétitions mécaniques de gestes ou de paroles, situations absurdes.</p>
+                        </div>
+                        <div class="effets-box">
+                            <span class="label-heading"><i class="fa-solid fa-bullseye"></i> Ce que ça apporte</span>
+                            <p>Au-delà de détendre, il a une fonction de critique sociale : on rit des défauts des personnages (avarice, hypocrisie) pour mieux les corriger dans la réalité.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== FIGURES DE STYLE ===== -->
-  <div id="tab-figures" class="section">
-    <div class="page-header">
-      <h1 class="page-title">Figures <em>de style</em></h1>
-      <p class="page-subtitle">Identifier, nommer et analyser les effets produits sur le lecteur</p>
-    </div>
-
-    <div class="section-label">
-      <h2>A. L'Insistance</h2>
-      <span class="section-era">Exagérer ou marteler une idée</span>
-    </div>
-    <div class="card-grid tight">
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Hyperbole</div>
-            <div class="fig-parens">Exagération volontaire</div>
-          </div>
-          <span class="badge badge-rose">Insistance</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Mourir de soif. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Amplifie la réalité pour traduire une émotion extrême (douleur immense, colère noire) ou crée un effet comique / satirique en tournant une situation en ridicule.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Anaphore</div>
-            <div class="fig-parens">Répétition en début de phrase / vers</div>
-          </div>
-          <span class="badge badge-rose">Insistance</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Paris outragé ! Paris brisé ! Paris martyrisé ! »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Crée un rythme incantatoire ou musical. Donne de la force à un discours (effet de plaidoyer) et montre l'obsession de l'auteur sur un sujet précis.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Accumulation / Gradation</div>
-            <div class="fig-parens">Énumération progressive</div>
-          </div>
-          <span class="badge badge-rose">Insistance</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Je me meurs, je suis mort, je suis enterré. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Crée un effet de profusion ou de saturation. La gradation accentue la tension dramatique et donne l'impression que la situation devient hors de contrôle.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label" style="margin-top:32px">
-      <h2>B. L'Analogie</h2>
-      <span class="section-era">Créer des images</span>
-    </div>
-    <div class="card-grid tight">
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">La Comparaison</div>
-            <div class="fig-parens">Avec outil : comme, tel que…</div>
-          </div>
-          <span class="badge badge-blue">Analogie</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« La Terre est bleue comme une orange. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Met en relief une caractéristique en reliant le réel à l'imaginaire. Rend une description plus concrète et parlante pour le lecteur.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">La Métaphore</div>
-            <div class="fig-parens">Sans outil de comparaison</div>
-          </div>
-          <span class="badge badge-blue">Analogie</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Ce garçon est un lion. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Plus forte que la comparaison, elle assimile directement deux réalités. Transforme la perception du lecteur en créant une image poétique frappante ou un trouble.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">La Personnification</div>
-            <div class="fig-parens">Donner vie à un objet / animal</div>
-          </div>
-          <span class="badge badge-blue">Analogie</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Le vent hurle dans la nuit. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Rend le décor actif et vivant. Donne souvent une atmosphère fantastique, inquiétante (nature hostile) ou poétique au texte.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Allégorie</div>
-            <div class="fig-parens">Idée abstraite sous forme concrète</div>
-          </div>
-          <span class="badge badge-blue">Analogie</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">La Mort représentée avec sa faux.</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Rend visible et concrète une idée complexe. Permet de mener une réflexion philosophique ou morale de manière très imagée.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label" style="margin-top:32px">
-      <h2>C. L'Opposition</h2>
-      <span class="section-era">Jouer sur les contrastes</span>
-    </div>
-    <div class="card-grid tight">
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Antithèse</div>
-            <div class="fig-parens">Deux opposés dans la même phrase</div>
-          </div>
-          <span class="badge badge-purple">Opposition</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Ici c'est le jour, là-bas c'est la nuit. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Souligne un conflit, un déchirement. Parfaite pour montrer les contradictions d'un personnage ou l'injustice d'une situation.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Oxymore</div>
-            <div class="fig-parens">Deux opposés collés ensemble</div>
-          </div>
-          <span class="badge badge-purple">Opposition</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Une obscure clarté. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Crée un effet de surprise esthétique. Sert à exprimer une réalité complexe ou impossible, souvent liée aux sentiments (ex. la souffrance agréable de l'amour).</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">Le Chiasme</div>
-            <div class="fig-parens">Structure en miroir A–B / B–A</div>
-          </div>
-          <span class="badge badge-purple">Opposition</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Il faut manger pour vivre, et non vivre pour manger. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Crée un effet d'enfermement ou de circularité. On a l'impression d'une situation inextricable ou d'un équilibre parfait.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label" style="margin-top:32px">
-      <h2>D. L'Atténuation</h2>
-      <span class="section-era">Dire moins pour sous-entendre plus</span>
-    </div>
-    <div class="card-grid tight">
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">La Litote</div>
-            <div class="fig-parens">Dire moins pour suggérer le maximum</div>
-          </div>
-          <span class="badge badge-amber">Atténuation</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Va, je ne te hais point. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Renforce la puissance du propos par la pudeur. Montre souvent la retenue d'un personnage qui cache des émotions tellement fortes qu'il n'ose pas les nommer.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Euphémisme</div>
-            <div class="fig-parens">Adoucir une réalité brutale</div>
-          </div>
-          <span class="badge badge-amber">Atténuation</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Il nous a quittés. » (pour « il est mort »)</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Atténue le choc de la réalité. Sert à masquer l'horreur par politesse, par peur, ou parfois de manière ironique.</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">L'Antiphrase</div>
-            <div class="fig-parens">L'ironie — dire le contraire</div>
-          </div>
-          <span class="badge badge-amber">Atténuation</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« C'est du propre ! » (chambre en désordre)</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Crée une complicité avec le lecteur qui doit décoder le vrai message. Sert à critiquer, se moquer ou dénoncer une absurdité avec détachement.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-label" style="margin-top:32px">
-      <h2>E. La Substitution</h2>
-      <span class="section-era">Désigner autrement</span>
-    </div>
-    <div class="card-grid tight">
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">La Métonymie</div>
-            <div class="fig-parens">Remplacer par un mot lié logiquement</div>
-          </div>
-          <span class="badge badge-teal">Substitution</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Boire un verre. » — « Lire un Zola. »</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Fluidifie le récit et accélère la lecture. Permet de focaliser l'attention sur un détail précis (ex. « les cuivres » pour les musiciens met l'accent sur le son).</p>
-        </div>
-      </div>
-      <div class="fig-card">
-        <div class="fig-card-top">
-          <div>
-            <div class="fig-name">La Périphrase</div>
-            <div class="fig-parens">Remplacer un mot par sa définition</div>
-          </div>
-          <span class="badge badge-teal">Substitution</span>
-        </div>
-        <div class="fig-body">
-          <div class="fig-example">
-            <span class="fig-example-label">Ex.</span>
-            <span class="fig-example-text">« Le roi des animaux. » (le lion)</span>
-          </div>
-          <p class="fig-effect-label">↳ Effet produit</p>
-          <p class="fig-effect-text">Génère une attente ou apporte un jugement. Soit elle idéalise l'objet (effet mélioratif), soit elle s'en moque (effet satirique).</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== REGISTRES ===== -->
-  <div id="tab-registres" class="section">
-    <div class="page-header">
-      <h1 class="page-title">Registres <em>littéraires</em></h1>
-      <p class="page-subtitle">Les tonalités d'un texte — reconnaître l'intention de l'auteur et l'effet sur le lecteur</p>
-    </div>
-    <div class="info-box">
-      <span class="info-box-icon">💡</span>
-      <p class="info-box-text">Un texte peut mêler plusieurs registres. L'essentiel est d'<strong>identifier le registre dominant</strong> et de montrer <strong>ce qu'il apporte</strong> au sens du texte.</p>
-    </div>
-    <div class="card-grid">
-      <div class="reg-card" style="--reg-color: #BE185D;">
-        <div class="reg-title">Le Registre Lyrique</div>
-        <div class="reg-subtitle">L'expression des sentiments</div>
-        <div class="reg-section">
-          <p class="reg-section-title indices">Indices à repérer</p>
-          <p class="reg-text">Omniprésence du « Je », vocabulaire des sentiments (amour, regret, nostalgie), thèmes de la nature et de la fuite du temps, phrases exclamatives.</p>
-        </div>
-        <div class="reg-section">
-          <p class="reg-section-title effet">Ce que ça apporte</p>
-          <p class="reg-text">Crée un effet d'intimité et de partage. L'auteur cherche à toucher la sensibilité du lecteur en faisant résonner ses propres émotions.</p>
-        </div>
-      </div>
-      <div class="reg-card" style="--reg-color: #7C3AED;">
-        <div class="reg-title">Le Registre Pathétique</div>
-        <div class="reg-subtitle">La pitié et la souffrance</div>
-        <div class="reg-section">
-          <p class="reg-section-title indices">Indices à repérer</p>
-          <p class="reg-text">Vocabulaire de la douleur, de la misère, de la mort ; présence de victimes (enfants, pauvres) ; phrases exclamatives.</p>
-        </div>
-        <div class="reg-section">
-          <p class="reg-section-title effet">Ce que ça apporte</p>
-          <p class="reg-text">Cherche à susciter la compassion et la pitié. L'auteur l'utilise pour dénoncer une injustice sociale en rendant la scène insoutenable.</p>
-        </div>
-      </div>
-      <div class="reg-card" style="--reg-color: #374151;">
-        <div class="reg-title">Le Registre Tragique</div>
-        <div class="reg-subtitle">Le destin et la fatalité</div>
-        <div class="reg-section">
-          <p class="reg-section-title indices">Indices à repérer</p>
-          <p class="reg-text">Vocabulaire du destin, du sang, de la mort ; personnages confrontés à des forces qui les dépassent ; absence d'issue possible.</p>
-        </div>
-        <div class="reg-section">
-          <p class="reg-section-title effet">Ce que ça apporte</p>
-          <p class="reg-text">Provoque la terreur et la pitié (la catharsis). Montre l'Homme face à sa condition mortelle et crée une tension dramatique maximale.</p>
-        </div>
-      </div>
-      <div class="reg-card" style="--reg-color: #D97706;">
-        <div class="reg-title">Le Registre Ironique / Satirique</div>
-        <div class="reg-subtitle">La critique et la moquerie</div>
-        <div class="reg-section">
-          <p class="reg-section-title indices">Indices à repérer</p>
-          <p class="reg-text">Antiphrases, caricatures, exagérations, décalages entre le ton sérieux et la futilité du sujet.</p>
-        </div>
-        <div class="reg-section">
-          <p class="reg-section-title effet">Ce que ça apporte</p>
-          <p class="reg-text">Crée une complicité critique. L'auteur pousse le lecteur à réfléchir et à dénoncer lui-même l'absurdité d'une situation.</p>
-        </div>
-      </div>
-      <div class="reg-card" style="--reg-color: #DC2626;">
-        <div class="reg-title">Le Registre Polémique</div>
-        <div class="reg-subtitle">Le combat et l'affrontement</div>
-        <div class="reg-section">
-          <p class="reg-section-title indices">Indices à repérer</p>
-          <p class="reg-text">Vocabulaire agressif, opposition « Nous » contre « Vous », anaphores, hyperboles, questions rhétoriques.</p>
-        </div>
-        <div class="reg-section">
-          <p class="reg-section-title effet">Ce que ça apporte</p>
-          <p class="reg-text">Transforme le texte en terrain de combat verbal. L'auteur cherche à indigner le lecteur et à détruire la crédibilité de son adversaire.</p>
-        </div>
-      </div>
-      <div class="reg-card" style="--reg-color: #15803D;">
-        <div class="reg-title">Le Registre Comique</div>
-        <div class="reg-subtitle">Le rire et le divertissement</div>
-        <div class="reg-section">
-          <p class="reg-section-title indices">Indices à repérer</p>
-          <p class="reg-text">Jeux de mots, quiproquos, répétitions mécaniques, situations absurdes.</p>
-        </div>
-        <div class="reg-section">
-          <p class="reg-section-title effet">Ce que ça apporte</p>
-          <p class="reg-text">Au-delà de détendre le lecteur, il a une fonction critique : on rit des défauts des personnages (avarice, hypocrisie) pour mieux les condamner.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== GRAMMAIRE ===== -->
-  <div id="tab-grammaire" class="section">
-    <div class="page-header">
-      <h1 class="page-title">Grammaire <em>& Syntaxe</em></h1>
-      <p class="page-subtitle">Analyser la structure des phrases pour en dégager les effets stylistiques</p>
-    </div>
-
-    <div class="grammar-block">
-      <div class="grammar-block-header" onclick="toggleBlock(this)">
-        <div>
-          <div class="grammar-block-title">A. La longueur et le rythme des phrases</div>
-          <div class="grammar-block-subtitle">Phrases courtes vs phrases longues</div>
-        </div>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="grammar-body">
-        <div class="grammar-row">
-          <div class="grammar-item">
-            <p class="grammar-item-label">Phrases très courtes (minimales / nominales)</p>
-            <p class="grammar-item-text">Créent un rythme <strong>saccadé, rapide ou brutal</strong>. Traduisent la surprise, la panique, la tension dramatique, ou miment une action très rapide.</p>
-          </div>
-          <div class="grammar-item">
-            <p class="grammar-item-label">Phrases très longues (les périodes)</p>
-            <p class="grammar-item-text">Créent un rythme <strong>fluide, musical ou solennel</strong>. L'auteur cherche à donner une impression de continuité, mimer la fuite du temps ou l'immensité d'un paysage.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-block">
-      <div class="grammar-block-header" onclick="toggleBlock(this)">
-        <div>
-          <div class="grammar-block-title">B. Les types de phrases</div>
-          <div class="grammar-block-subtitle">La ponctuation comme outil stylistique</div>
-        </div>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="grammar-body">
-        <div class="grammar-row">
-          <div class="grammar-item">
-            <p class="grammar-item-label">Type exclamatif ( ! )</p>
-            <p class="grammar-item-text">Traduit un <strong>débordement de l'émotion</strong> : colère, joie immense, douleur, indignation.</p>
-          </div>
-          <div class="grammar-item">
-            <p class="grammar-item-label">Type interrogatif ( ? )</p>
-            <p class="grammar-item-text">Révèle le doute ou la détresse. La <strong>question rhétorique</strong> prend le lecteur à témoin pour le convaincre.</p>
-          </div>
-          <div class="grammar-item">
-            <p class="grammar-item-label">L'impératif (les ordres)</p>
-            <p class="grammar-item-text">Marque la <strong>domination, l'autorité ou l'urgence</strong>. Pousse le destinataire à l'action.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-block">
-      <div class="grammar-block-header" onclick="toggleBlock(this)">
-        <div>
-          <div class="grammar-block-title">C. Les temps des verbes</div>
-          <div class="grammar-block-subtitle">Présent, imparfait, passé simple</div>
-        </div>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="grammar-body">
-        <div class="grammar-row">
-          <div class="grammar-item">
-            <p class="grammar-item-label">Présent de l'indicatif</p>
-            <p class="grammar-item-text">Crée un effet d'<strong>immédiateté</strong> (présent d'énonciation) ou donne au propos une valeur <strong>universelle</strong> (présent de vérité générale).</p>
-          </div>
-          <div class="grammar-item">
-            <p class="grammar-item-label">Imparfait vs Passé simple</p>
-            <p class="grammar-item-text">L'<strong>imparfait</strong> installe une ambiance de décor ou d'habitude. Le <strong>passé simple</strong> fait surgir l'action (soudaine et unique). Le passage de l'un à l'autre crée une <strong>rupture dramatique</strong>.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grammar-block">
-      <div class="grammar-block-header" onclick="toggleBlock(this)">
-        <div>
-          <div class="grammar-block-title">D. Les pronoms</div>
-          <div class="grammar-block-subtitle">Je, Nous, On — et leurs effets</div>
-        </div>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="grammar-body">
-        <div class="grammar-row">
-          <div class="grammar-item">
-            <p class="grammar-item-label">Du « Je » au « Nous »</p>
-            <p class="grammar-item-text">Donne une <strong>dimension collective et fraternelle</strong> au texte, élargissant l'expérience personnelle à l'humanité entière.</p>
-          </div>
-          <div class="grammar-item">
-            <p class="grammar-item-label">Le pronom indéfini « On »</p>
-            <p class="grammar-item-text">Crée une impression de <strong>flou et d'anonymat inquiétant</strong>, ou inclut le lecteur de force dans une vérité générale.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== LEXIQUE ===== -->
-  <div id="tab-lexique" class="section">
-    <div class="page-header">
-      <h1 class="page-title">Lexique <em>& Vocabulaire</em></h1>
-      <p class="page-subtitle">Analyser les mots pour révéler l'intention de l'auteur et l'ambiance du texte</p>
-    </div>
-    <div class="card-grid">
-      <div class="card" style="--card-accent: #2563EB;">
-        <div class="card-head">
-          <div class="card-title">Les champs lexicaux</div>
-          <span class="badge badge-blue">Le réseau de sens</span>
-        </div>
-        <p class="card-desc">Ensemble de mots qui se rapportent à un même thème ou à une même idée dans un texte.</p>
-        <div class="card-indices">
-          <p class="card-indices-label">Ce que ça apporte</p>
-          <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.65;">Installent l'ambiance dominante du texte et révèlent les obsessions d'un personnage ou de l'auteur. Ex. : le champ lexical de la maladie crée une atmosphère lourde qui préfigure une fin tragique.</p>
-        </div>
-      </div>
-      <div class="card" style="--card-accent: #7C3AED;">
-        <div class="card-head">
-          <div class="card-title">Termes mélioratifs / péjoratifs</div>
-          <span class="badge badge-purple">Le jugement</span>
-        </div>
-        <p class="card-desc">Les termes <strong>mélioratifs</strong> valorisent positivement. Les termes <strong>péjoratifs</strong> dévalorisent ou condamnent.</p>
-        <div class="card-indices">
-          <p class="card-indices-label">Ce que ça apporte</p>
-          <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.65;">Montrent immédiatement la position et le jugement de l'auteur, forçant le lecteur à admirer (mélioratif) ou à rejeter (péjoratif) ce qui est décrit.</p>
-        </div>
-      </div>
-      <div class="card" style="--card-accent: #0F766E;">
-        <div class="card-head">
-          <div class="card-title">Les niveaux de langue</div>
-          <span class="badge badge-teal">Le ton et le réalisme</span>
-        </div>
-        <p class="card-desc">Niveau <strong>soutenu</strong>, <strong>courant</strong> ou <strong>familier</strong> — chaque registre de langue a un effet particulier.</p>
-        <div class="card-indices">
-          <p class="card-indices-label">Ce que ça apporte</p>
-          <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.65;">Le niveau soutenu donne de la noblesse ou une dimension sacrée. Le niveau familier crée un effet de réel ou une proximité immédiate avec le lecteur.</p>
-        </div>
-      </div>
-      <div class="card" style="--card-accent: #B45309;">
-        <div class="card-head">
-          <div class="card-title">Mots abstraits vs mots concrets</div>
-          <span class="badge badge-amber">La matérialité</span>
-        </div>
-        <p class="card-desc">Vocabulaire <strong>abstrait</strong> (amour, liberté, justice) vs vocabulaire <strong>concret</strong> (pierre, sang, feu).</p>
-        <div class="card-indices">
-          <p class="card-indices-label">Ce que ça apporte</p>
-          <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.65;">Le vocabulaire abstrait donne une dimension philosophique ou universelle. Le vocabulaire concret cherche à frapper l'imagination et les sens du lecteur (matérialité forte).</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== GENRES & FORMES ===== -->
-  <div id="tab-genres" class="section">
-    <div class="page-header">
-      <h1 class="page-title">Genres <em>& Formes</em></h1>
-      <p class="page-subtitle">Structure et forme spécifiques selon la poésie, le théâtre et le roman</p>
-    </div>
-
-    <div class="genre-grid">
-      <div class="genre-col">
-        <div class="genre-col-title">🎵 Poésie — Rythme et musique</div>
-
-        <div class="genre-item">
-          <div class="genre-item-title">L'Enjambement / Le Rejet / Le Contre-rejet</div>
-          <div class="genre-item-sub">Brise le rythme du poème</div>
-          <p class="genre-item-text">Ils brisent le rythme régulier du poème. Le <strong>rejet</strong> met un coup de projecteur immense sur le mot isolé (effet de surprise ou violence). L'<strong>enjambement</strong> crée un effet de fluidité ou de débordement lyrique.</p>
         </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">La césure à l'hémistiche</div>
-          <div class="genre-item-sub">Alexandrins — coupe 6/6</div>
-          <p class="genre-item-text">Crée un <strong>équilibre classique parfait</strong> (6 / 6). Si elle est déplacée, cela crée un effet de déséquilibre, de tension ou de modernité.</p>
-        </div>
-      </div>
+        <div id="grammaire" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title">Grammaire & Syntaxe</h1>
+                <p class="view-description">Analyser la structure profonde de la phrase et le rythme des verbes.</p>
+            </div>
+            <div class="grid-cards">
 
-      <div class="genre-col">
-        <div class="genre-col-title">🎭 Théâtre — Dynamique de la parole</div>
+                <div class="card" data-search="rythme phrases courtes minimales nominales longues periodes saccade fluide musical">
+                    <div class="card-header"><span class="badge badge-cat">Rythme & Longueur</span></div>
+                    <h3 class="card-title">Longueur & Rythme</h3>
+                    <div class="card-details">
+                        <p><strong>Phrases courtes (minimales / nominales) :</strong> Créent un rythme saccadé, rapide ou brutal. Traduit la surprise, la panique ou mime l'action rapide.</p>
+                        <p style="margin-top:10px;"><strong>Phrases longues (périodes) :</strong> Créent un rythme fluide, musical ou solennel. Mime la fuite du temps ou l'immensité.</p>
+                    </div>
+                </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">La Tirade</div>
-          <div class="genre-item-sub">Longue réplique</div>
-          <p class="genre-item-text">Donne une dimension <strong>solennelle ou tragique</strong>. Permet au personnage de déployer toute son argumentation ou de faire éclater sa passion.</p>
-        </div>
+                <div class="card" data-search="ponctuation exclamatif interrogatif imperatif émotion doute autorite">
+                    <div class="card-header"><span class="badge badge-cat">Types de phrases</span></div>
+                    <h3 class="card-title">Types & Ponctuation</h3>
+                    <div class="card-details">
+                        <p><strong>Exclamatif (!) :</strong> Traduit un débordement d'émotion fort (colère, douleur extrême, joie immense).</p>
+                        <p style="margin-top:10px;"><strong>Interrogatif (?) :</strong> Révèle le doute ou la détresse. Question rhétorique pour impliquer le lecteur.</p>
+                        <p style="margin-top:10px;"><strong>L'impératif :</strong> Marque la domination, l'urgence ou l'autorité stricte.</p>
+                    </div>
+                </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">La Stichomythie</div>
-          <div class="genre-item-sub">Répliques très courtes</div>
-          <p class="genre-item-text">Crée un effet d'<strong>accélération brutale</strong> du rythme. Mime l'affrontement, le duel verbal ou une vive tension dramatique.</p>
-        </div>
+                <div class="card" data-search="temps verbes present imparfait passe simple rupture action">
+                    <div class="card-header"><span class="badge badge-cat">Temps verbaux</span></div>
+                    <h3 class="card-title">Les Temps des Verbes</h3>
+                    <div class="card-details">
+                        <p><strong>Présent :</strong> Énonciation (immédiateté) ou vérité générale (valeur universelle incontestable).</p>
+                        <p style="margin-top:10px;"><strong>Imparfait vs Passé simple :</strong> L'imparfait pose le décor (action qui dure/habitudes) tandis que le passé simple fait surgir l'action brutale. Leur alternance crée une rupture dramatique.</p>
+                    </div>
+                </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">Le Monologue</div>
-          <div class="genre-item-sub">Discours intérieur</div>
-          <p class="genre-item-text">Crée un effet de <strong>confidence absolue</strong> et d'intimité avec le public. Permet d'accéder aux pensées secrètes du personnage.</p>
-        </div>
+                <div class="card" data-search="pronoms je nous on collectif anonyme">
+                    <div class="card-header"><span class="badge badge-cat">Pronoms</span></div>
+                    <h3 class="card-title">Les Pronoms</h3>
+                    <div class="card-details">
+                        <p><strong>Je → Nous :</strong> Donne une dimension fraternelle et collective. Élargit le témoignage individuel à l'humanité entière.</p>
+                        <p style="margin-top:10px;"><strong>Pronom indéfini "On" :</strong> Crée un flou et un anonymat inquiétant, ou englobe de force le lecteur dans une affirmation.</p>
+                    </div>
+                </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">Les Didascalies</div>
-          <div class="genre-item-sub">Instructions de mise en scène</div>
-          <p class="genre-item-text">Guident le jeu, mais révèlent souvent un <strong>décalage entre les mots dits et la réalité des gestes</strong> (ironie, hypocrisie).</p>
-        </div>
-      </div>
-
-      <div class="genre-col">
-        <div class="genre-col-title">📖 Roman / Récit — Temps et regard</div>
-
-        <div class="genre-item">
-          <div class="genre-item-title">La Focale (Point de vue)</div>
-          <div class="genre-item-sub">Interne / Omnisciente</div>
-          <p class="genre-item-text"><strong>Interne :</strong> crée de l'empathie ou montre une vision subjective / déformée de la réalité.<br><strong>Omnisciente :</strong> donne une dimension de surplomb, le narrateur guide le lecteur comme un dieu.</p>
-        </div>
-
-        <div class="genre-item">
-          <div class="genre-item-title">La Scène</div>
-          <div class="genre-item-sub">Rythme du récit — temps réel</div>
-          <p class="genre-item-text">Donne l'impression de vivre l'action en temps réel (<strong>théâtralisation</strong>).</p>
+            </div>
         </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">L'Ellipse</div>
-          <div class="genre-item-sub">Rythme du récit — accélération</div>
-          <p class="genre-item-text">Accélère le récit pour se focaliser uniquement sur les <strong>moments de crise</strong>.</p>
+        <div id="lexique" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title">Lexique & Vocabulaire</h1>
+                <p class="view-description">Les réseaux de mots et l'analyse de leur charge affective.</p>
+            </div>
+            <div class="grid-cards">
+
+                <div class="card" data-search="champs lexicaux reseau sens ambiance obsessions">
+                    <div class="card-header"><span class="badge badge-cat">Réseau de sens</span></div>
+                    <h3 class="card-title">Champs Lexicaux</h3>
+                    <div class="card-details">
+                        <p>Ils installent l'ambiance dominante d'un texte et révèlent les obsessions d'un personnage ou de l'auteur.</p>
+                        <div class="indices-box">
+                            <p><em>Exemple :</em> Le champ lexical de la maladie crée une atmosphère lourde qui préfigure une fin tragique.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-search="melioratif pejoratif jugement forcer rejeter admirer">
+                    <div class="card-header"><span class="badge badge-cat">Le Jugement</span></div>
+                    <h3 class="card-title">Mélioratifs & Péjoratifs</h3>
+                    <div class="card-details">
+                        <p>Ils révèlent immédiatement la position et le jugement implicite ou explicite de l'auteur, forçant le lecteur à admirer (mélioratif) ou à rejeter (péjoratif) ce qui est décrit.</p>
+                    </div>
+                </div>
+
+                <div class="card" data-search="niveaux langue soutenu familier noblesse reel">
+                    <div class="card-header"><span class="badge badge-cat">Niveaux de langue</span></div>
+                    <h3 class="card-title">Niveaux de langue</h3>
+                    <div class="card-details">
+                        <p><strong>Soutenu :</strong> Apporte de la noblesse, de l'élévation ou une dimension sacrée.</p>
+                        <p style="margin-top:10px;"><strong>Familier :</strong> Crée un effet de réel (ancrage social fort) ou une proximité immédiate.</p>
+                    </div>
+                </div>
+
+                <div class="card" data-search="abstrait concret philosophique imagination sens">
+                    <div class="card-header"><span class="badge badge-cat">Abstraction vs Matière</span></div>
+                    <h3 class="card-title">Abstrait vs Concret</h3>
+                    <div class="card-details">
+                        <p><strong>Vocabulaire abstrait :</strong> Oriente le texte vers une dimension philosophique, universelle ou théorique.</p>
+                        <p style="margin-top:10px;"><strong>Vocabulaire concret :</strong> Cherche à frapper l'imagination, les sens et à donner une matérialité forte.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div class="genre-item">
-          <div class="genre-item-title">La Pause (Description)</div>
-          <div class="genre-item-sub">Rythme du récit — suspension</div>
-          <p class="genre-item-text">Crée une atmosphère, <strong>suspend le temps</strong> et donne des indices psychologiques sur les personnages ou le décor.</p>
+        <div id="genres" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title">Structures & Genres Littéraires</h1>
+                <p class="view-description">Les règles spécifiques au théâtre, à la poésie et au roman.</p>
+            </div>
+            <div class="grid-cards">
+
+                <div class="card" data-search="poesie enjambement rejet contre-rejet cesure hemistiche alexandrin">
+                    <div class="card-header"><span class="badge badge-genre">Poésie</span></div>
+                    <h3 class="card-title">Le Rythme et le Vers</h3>
+                    <div class="card-details">
+                        <p><strong>Enjambement / Rejet :</strong> Le rejet met un coup de projecteur immense sur le mot isolé (surprise/violence). L'enjambement crée une fluidité ou un débordement lyrique.</p>
+                        <p style="margin-top:10px;"><strong>Césure à l'hémistiche :</strong> Crée un équilibre classique parfait (6/6). Si elle est déplacée, elle crée un effet de déséquilibre moderne.</p>
+                    </div>
+                </div>
+
+                <div class="card" data-search="theatre tirade stichomythie monologue didascalies parole">
+                    <div class="card-header"><span class="badge badge-genre">Théâtre</span></div>
+                    <h3 class="card-title">Dynamique de la Parole</h3>
+                    <div class="card-details">
+                        <p><strong>Tirade :</strong> Dimension solennelle. Permet de déployer son argumentation.</p>
+                        <p style="margin-top:10px;"><strong>Stichomythie :</strong> Accélération brutale. Mime l'affrontement ou la vive tension.</p>
+                        <p style="margin-top:10px;"><strong>Monologue :</strong> Confiance absolue et accès direct aux pensées du personnage.</p>
+                    </div>
+                </div>
+
+                <div class="card" data-search="roman recit focale point vue interne omniscient scene ellipse pause">
+                    <div class="card-header"><span class="badge badge-genre">Roman & Récit</span></div>
+                    <h3 class="card-title">Temps et Regard</h3>
+                    <div class="card-details">
+                        <p><strong>Focale Interne :</strong> Crée de l'empathie, vision subjective.</p>
+                        <p style="margin-top:10px;"><strong>Focale Omnisciente :</strong> Guide le lecteur comme un dieu.</p>
+                        <p style="margin-top:10px;"><strong>Rythme :</strong> Scène (temps réel), Ellipse (accélération), Pause (description, fige le temps).</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-</main>
-
-<script>
-const tabs = document.querySelectorAll('.tab-btn');
-const sections = document.querySelectorAll('.section');
-const searchInput = document.getElementById('search');
-const searchResults = document.getElementById('search-results');
-const themeToggle = document.getElementById('theme-toggle');
-const iconSun = document.getElementById('icon-sun');
-const iconMoon = document.getElementById('icon-moon');
-let currentTheme = 'light';
-
-// --- THEME ---
-themeToggle.addEventListener('click', () => {
-  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  iconSun.style.display = currentTheme === 'dark' ? 'block' : 'none';
-  iconMoon.style.display = currentTheme === 'light' ? 'block' : 'none';
-});
-
-// --- TABS ---
-tabs.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabs.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const target = btn.dataset.tab;
-    searchInput.value = '';
-    searchResults.classList.remove('active');
-    sections.forEach(s => {
-      if (s.id === 'search-results') return;
-      s.classList.toggle('active', s.id === 'tab-' + target);
-    });
-  });
-});
-
-// --- ACCORDION ---
-function toggleBlock(header) {
-  const body = header.nextElementSibling;
-  const chevron = header.querySelector('.chevron');
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  chevron.classList.toggle('open', !isOpen);
-  header.classList.toggle('open', !isOpen);
-}
-
-// --- SEARCH DATA ---
-const searchData = [
-  // Mouvements
-  { title: "L'Humanisme", category: "Mouvement", badge: "badge-blue", tab: "mouvements", content: "Éloges du savoir, éducation, sagesse, nature humaine, philosophes Antiquité, présence de morale. 1530–1570." },
-  { title: "La Pléiade", category: "Mouvement · Poésie", badge: "badge-purple", tab: "mouvements", content: "Poèmes en alexandrins, odes, sonnets, célébration de la beauté féminine, de l'amour, immortalité de la poésie, mythologie gréco-romaine. 1549–1570." },
-  { title: "Le Baroque", category: "Mouvement", badge: "badge-amber", tab: "mouvements", content: "Mort, illusion, déguisement, instabilité du monde, métamorphose, antithèses, hyperboles. 1580–1660." },
-  { title: "Le Classicisme", category: "Mouvement", badge: "badge-teal", tab: "mouvements", content: "Clarté et mesure, contrôle des passions, personnages nobles, règles du théâtre, maximes morales, parallélismes, litotes. 1660–1690." },
-  { title: "Les Lumières", category: "Mouvement", badge: "badge-amber", tab: "mouvements", content: "Critique des préjugés, esclavage, religion. Éloge de la raison, liberté, tolérance. Ironie, satire, conte philosophique. 1715–1789." },
-  { title: "Le Romantisme", category: "Mouvement", badge: "badge-rose", tab: "mouvements", content: "Omniprésence du Je, mélancolie, révolte, nature miroir de l'âme, solitude, nuit, registre lyrique ou tragique. 1800–1850." },
-  { title: "Le Réalisme", category: "Mouvement · Roman", badge: "badge-green", tab: "mouvements", content: "Descriptions très précises, vocabulaire argent, affaires, social, personnages ancrés dans une réalité historique. 1830–1890." },
-  { title: "Le Parnasse", category: "Mouvement · Poésie", badge: "badge-purple", tab: "mouvements", content: "Poésie impersonnelle, rimes riches, structures fixes, thèmes sculpture, peinture, archéologie. 1840–1890." },
-  { title: "Le Naturalisme", category: "Mouvement · Roman", badge: "badge-gray", tab: "mouvements", content: "Vocabulaire médical, scientifique, industriel, tares héréditaires, alcoolisme, folie, misère du peuple. 1870–1890." },
-  { title: "Le Symbolisme", category: "Mouvement · Poésie", badge: "badge-blue", tab: "mouvements", content: "Paysages flous, brume, pluie, musicalité du vers, rêve, mystère, correspondances sensorielles. 1869–1896." },
-  { title: "Le Surréalisme", category: "Mouvement", badge: "badge-rose", tab: "mouvements", content: "Images bizarres, absurdes, insolites, rêve, hasard, absence de ponctuation, liberté de la forme. 1919–1945." },
-  { title: "L'Absurde", category: "Mouvement", badge: "badge-gray", tab: "mouvements", content: "Personnages égarés, répétitions inutiles, dialogues qui tournent en rond, solitude, ennui, mort, non-sens. 1940–1960." },
-  { title: "Le Nouveau Roman", category: "Mouvement", badge: "badge-teal", tab: "mouvements", content: "Descriptions d'objets froides et ultra-détaillées, déconstruction du temps, personnage anonyme. 1950–1970." },
-  // Figures
-  { title: "L'Hyperbole", category: "Figure · Insistance", badge: "badge-rose", tab: "figures", content: "Exagération. Ex. : Mourir de soif. Amplifie la réalité, traduit une émotion extrême ou crée un effet comique." },
-  { title: "L'Anaphore", category: "Figure · Insistance", badge: "badge-rose", tab: "figures", content: "Répétition en début de phrase ou vers. Ex. : Paris outragé ! Paris brisé ! Rythme incantatoire, force un discours." },
-  { title: "L'Accumulation / Gradation", category: "Figure · Insistance", badge: "badge-rose", tab: "figures", content: "Énumération. Ex. : Je me meurs, je suis mort, je suis enterré. Profusion, tension dramatique." },
-  { title: "La Comparaison", category: "Figure · Analogie", badge: "badge-blue", tab: "figures", content: "Avec outil comme, tel que. Ex. : La Terre est bleue comme une orange. Rend une description plus concrète." },
-  { title: "La Métaphore", category: "Figure · Analogie", badge: "badge-blue", tab: "figures", content: "Sans outil de comparaison. Ex. : Ce garçon est un lion. Assimile deux réalités, image poétique frappante." },
-  { title: "La Personnification", category: "Figure · Analogie", badge: "badge-blue", tab: "figures", content: "Donner vie à un objet ou animal. Ex. : Le vent hurle dans la nuit. Rend le décor actif et vivant." },
-  { title: "L'Allégorie", category: "Figure · Analogie", badge: "badge-blue", tab: "figures", content: "Idée abstraite sous forme concrète. Ex. : La Mort avec sa faux. Rend visible une idée complexe." },
-  { title: "L'Antithèse", category: "Figure · Opposition", badge: "badge-purple", tab: "figures", content: "Deux opposés dans la même phrase. Ex. : Ici c'est le jour, là-bas c'est la nuit. Souligne un conflit." },
-  { title: "L'Oxymore", category: "Figure · Opposition", badge: "badge-purple", tab: "figures", content: "Deux opposés collés. Ex. : Une obscure clarté. Exprime une réalité complexe ou les sentiments contradictoires." },
-  { title: "Le Chiasme", category: "Figure · Opposition", badge: "badge-purple", tab: "figures", content: "Structure en miroir A-B/B-A. Ex. : Manger pour vivre, non vivre pour manger. Effet d'enfermement ou équilibre." },
-  { title: "La Litote", category: "Figure · Atténuation", badge: "badge-amber", tab: "figures", content: "Dire moins pour suggérer le maximum. Ex. : Va, je ne te hais point. Montre retenue, cache émotions fortes." },
-  { title: "L'Euphémisme", category: "Figure · Atténuation", badge: "badge-amber", tab: "figures", content: "Adoucir une réalité brutale. Ex. : Il nous a quittés. Atténue le choc de la réalité." },
-  { title: "L'Antiphrase", category: "Figure · Atténuation (Ironie)", badge: "badge-amber", tab: "figures", content: "Dire le contraire de ce qu'on pense. Ex. : C'est du propre ! Complicité critique avec le lecteur." },
-  { title: "La Métonymie", category: "Figure · Substitution", badge: "badge-teal", tab: "figures", content: "Remplacer par un mot lié logiquement. Ex. : Boire un verre, lire un Zola. Fluidifie le récit." },
-  { title: "La Périphrase", category: "Figure · Substitution", badge: "badge-teal", tab: "figures", content: "Remplacer un mot par sa définition. Ex. : Le roi des animaux. Génère une attente ou un jugement." },
-  // Registres
-  { title: "Registre Lyrique", category: "Registre", badge: "badge-rose", tab: "registres", content: "Expression des sentiments. Présence du Je, vocabulaire des sentiments, nature, temps, exclamations. Intimité et partage." },
-  { title: "Registre Pathétique", category: "Registre", badge: "badge-purple", tab: "registres", content: "Pitié et souffrance. Vocabulaire douleur, misère, mort, victimes. Susciter la compassion, dénoncer une injustice." },
-  { title: "Registre Tragique", category: "Registre", badge: "badge-gray", tab: "registres", content: "Destin et fatalité. Vocabulaire du destin, sang, mort, forces qui dépassent. Provoque terreur et pitié, catharsis." },
-  { title: "Registre Ironique / Satirique", category: "Registre", badge: "badge-amber", tab: "registres", content: "Critique et moquerie. Antiphrases, caricatures, exagérations. Complicité critique avec le lecteur." },
-  { title: "Registre Polémique", category: "Registre", badge: "badge-rose", tab: "registres", content: "Combat et affrontement. Vocabulaire agressif, Nous contre Vous, anaphores, hyperboles, questions rhétoriques." },
-  { title: "Registre Comique", category: "Registre", badge: "badge-green", tab: "registres", content: "Rire et divertissement. Jeux de mots, quiproquos, répétitions mécaniques, situations absurdes. Fonction critique." },
-  // Grammaire
-  { title: "Phrases courtes / longues", category: "Grammaire", badge: "badge-blue", tab: "grammaire", content: "Courtes : rythme saccadé, tension. Longues : fluide, musical, solennel." },
-  { title: "Types de phrases — Exclamative, Interrogative, Impérative", category: "Grammaire", badge: "badge-blue", tab: "grammaire", content: "Exclamatif : émotion. Interrogatif : doute, question rhétorique. Impératif : domination, urgence." },
-  { title: "Les temps des verbes", category: "Grammaire", badge: "badge-blue", tab: "grammaire", content: "Présent : immédiateté ou vérité générale. Imparfait : décor, habitude. Passé simple : action soudaine. Rupture entre les deux." },
-  { title: "Les pronoms Je, Nous, On", category: "Grammaire", badge: "badge-blue", tab: "grammaire", content: "Je vers Nous : dimension collective. On : flou, anonymat inquiétant ou inclusion du lecteur." },
-  // Lexique
-  { title: "Champs lexicaux", category: "Lexique", badge: "badge-blue", tab: "lexique", content: "Réseau de mots autour d'un même thème. Installe l'ambiance dominante, révèle les obsessions de l'auteur." },
-  { title: "Termes mélioratifs et péjoratifs", category: "Lexique", badge: "badge-purple", tab: "lexique", content: "Mélioratifs : valorisent. Péjoratifs : dévalorisent. Montrent le jugement de l'auteur." },
-  { title: "Niveaux de langue", category: "Lexique", badge: "badge-teal", tab: "lexique", content: "Soutenu : noblesse, dimension sacrée. Familier : effet de réel, proximité avec le lecteur." },
-  { title: "Mots abstraits vs mots concrets", category: "Lexique", badge: "badge-amber", tab: "lexique", content: "Abstrait : dimension philosophique et universelle. Concret : frappe l'imagination et les sens du lecteur." },
-  // Genres
-  { title: "L'Enjambement / Rejet / Contre-rejet", category: "Poésie", badge: "badge-blue", tab: "genres", content: "Brisent le rythme du poème. Rejet met en valeur un mot. Enjambement crée fluidité ou débordement lyrique." },
-  { title: "La Césure à l'hémistiche", category: "Poésie · Alexandrins", badge: "badge-blue", tab: "genres", content: "Coupe 6/6. Équilibre classique. Si déplacée : déséquilibre, tension ou modernité." },
-  { title: "La Tirade", category: "Théâtre", badge: "badge-purple", tab: "genres", content: "Longue réplique. Dimension solennelle ou tragique. Permet de déployer une argumentation ou une passion." },
-  { title: "La Stichomythie", category: "Théâtre", badge: "badge-purple", tab: "genres", content: "Répliques très courtes. Accélération brutale du rythme. Mime l'affrontement, le duel verbal." },
-  { title: "Le Monologue", category: "Théâtre", badge: "badge-purple", tab: "genres", content: "Discours intérieur. Confidence absolue, accès aux pensées secrètes du personnage." },
-  { title: "Les Didascalies", category: "Théâtre", badge: "badge-purple", tab: "genres", content: "Instructions de mise en scène. Révèlent un décalage entre mots dits et gestes (ironie, hypocrisie)." },
-  { title: "La Focale / Point de vue", category: "Roman · Récit", badge: "badge-green", tab: "genres", content: "Interne : empathie, subjectivité. Omnisciente : surplomb, le narrateur guide comme un dieu." },
-  { title: "La Scène", category: "Roman · Rythme du récit", badge: "badge-green", tab: "genres", content: "Temps réel. Donne l'impression de vivre l'action, théâtralisation." },
-  { title: "L'Ellipse", category: "Roman · Rythme du récit", badge: "badge-green", tab: "genres", content: "Accélération. Saute des passages pour se focaliser sur les moments de crise." },
-  { title: "La Pause (Description)", category: "Roman · Rythme du récit", badge: "badge-green", tab: "genres", content: "Suspension du temps. Crée une atmosphère, donne des indices psychologiques." },
-];
-
-function highlight(text, query) {
-  if (!query) return text;
-  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<em class="hl">$1</em>');
-}
-
-function performSearch(query) {
-  const q = query.trim().toLowerCase();
-  if (!q) {
-    searchResults.classList.remove('active');
-    document.querySelectorAll('.section:not(#search-results)').forEach(s => {
-      if (s.id !== 'search-results') {
-        const tab = document.querySelector('.tab-btn.active');
-        s.classList.toggle('active', s.id === 'tab-' + (tab ? tab.dataset.tab : 'mouvements'));
-      }
-    });
-    return;
-  }
-
-  const results = searchData.filter(item =>
-    item.title.toLowerCase().includes(q) ||
-    item.content.toLowerCase().includes(q) ||
-    item.category.toLowerCase().includes(q)
-  );
-
-  document.querySelectorAll('.section:not(#search-results)').forEach(s => s.classList.remove('active'));
-  searchResults.classList.add('active');
-
-  if (results.length === 0) {
-    searchResults.innerHTML = `<div class="no-results">Aucun résultat pour « <strong>${query}</strong> »</div>`;
-    return;
-  }
-
-  searchResults.innerHTML = `
-    <div class="page-header">
-      <h1 class="page-title">Résultats <em>de recherche</em></h1>
-      <p class="page-subtitle">${results.length} résultat${results.length > 1 ? 's' : ''} pour « ${query} »</p>
-    </div>
-    ${results.map(r => `
-      <div class="search-result-item" onclick="goToTab('${r.tab}')">
-        <div class="sr-title">${highlight(r.title, query)}</div>
-        <div class="sr-text">${highlight(r.content.substring(0, 120) + (r.content.length > 120 ? '…' : ''), query)}</div>
-        <div class="sr-meta">
-          <span class="badge ${r.badge}">${r.category}</span>
-          <span class="badge badge-gray">→ Onglet ${r.tab}</span>
+        <div id="metho-commentaire" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title" style="color: #10b981;"><i class="fa-solid fa-pen-fancy"></i> Méthodologie du Commentaire</h1>
+                <p class="view-description">Expliquer comment un auteur s'y prend pour faire passer son message, en justifiant par la forme.</p>
+            </div>
+            <div class="stepper">
+                <div class="step-item">
+                    <div class="step-badge">1</div>
+                    <div class="step-content">
+                        <div class="step-title">
+                            <span>Le Travail au Brouillon</span>
+                            <span class="step-time"><i class="fa-regular fa-clock"></i> 1h à 1h30</span>
+                        </div>
+                        <p class="step-text">La phase de préparation indispensable pour construire des fondations solides :</p>
+                        <ul class="step-list">
+                            <li><strong>Lectures successives :</strong> Lis le texte au moins 3 fois. (1 : sens global, 2 : repérer les mouvements, 3 : traquer les procédés avec des surligneurs).</li>
+                            <li><strong>Problématique :</strong> C'est la grande question directrice du texte (ex: <em>Comment le poète transforme-t-il la laideur en beauté ?</em>).</li>
+                            <li><strong>Le Plan Détaillé :</strong> Trouve 2 ou 3 grands axes de lecture (I, II, III) composés chacun de 2 ou 3 sous-parties (A, B, C). Au brouillon, structure chaque sous-partie ainsi : <span style="color: var(--accent); font-weight:600;">Idée + Citation + Procédé + Analyse</span>.</li>
+                            <li><strong>Rédaction partielle :</strong> Rédige l'introduction et la conclusion entièrement au brouillon.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge">2</div>
+                    <div class="step-content">
+                        <div class="step-title">L'Introduction <span style="font-size:0.9rem; font-weight: normal; opacity: 0.8;">(Un seul paragraphe)</span></div>
+                        <p class="step-text">Elle fonctionne comme un entonnoir, partant du plus général au plus précis :</p>
+                        <ul class="step-list">
+                            <li><strong>L'Amorce (ou accroche) :</strong> Phrase sur le mouvement littéraire, le siècle ou le thème général du texte.</li>
+                            <li><strong>La Présentation :</strong> Nom de l'auteur, titre de l'œuvre (souligné), date de parution et résumé très bref du passage.</li>
+                            <li><strong>La Problématique :</strong> Formule ta question directrice de manière claire.</li>
+                            <li><strong>L'Annonce du plan :</strong> Présente tes grands axes de façon fluide et rédigée (<em>"Dans un premier temps... puis nous verrons que..."</em>).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Le Développement & La Règle d'Or <span style="color:#10b981;">AEI</span></div>
+                        <p class="step-text">Cœur du devoir. Saute une ligne entre chaque grande partie, mais pas entre les sous-parties. Chaque paragraphe doit strictement respecter le triptyque :</p>
+                        <div class="gold-rule-box">
+                            <h4 style="font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-star"></i> La Règle d'or AEI :</h4>
+                            <div class="aei-grid">
+                                <div class="aei-card">
+                                    <div class="aei-letter">A</div>
+                                    <strong>Affirmation</strong>
+                                    <p style="font-size:0.85rem; margin-top:4px;">Tu annonces l'idée clé de ton paragraphe (Ex : <em>Le narrateur exprime un désespoir profond.</em>)</p>
+                                </div>
+                                <div class="aei-card">
+                                    <div class="aei-letter">E</div>
+                                    <strong>Exemple / Citation</strong>
+                                    <p style="font-size:0.85rem; margin-top:4px;">Citer précisément le texte avec des guillemets et identifier le procédé (Ex : <em>L'hyperbole "je meurs" à la l. 4.</em>)</p>
+                                </div>
+                                <div class="aei-card">
+                                    <div class="aei-letter">I</div>
+                                    <strong>Interprétation</strong>
+                                    <p style="font-size:0.85rem; margin-top:4px;">Expliquer l'effet produit par ce procédé sur le lecteur (Ex : <em>Cette exagération traduit une souffrance insurmontable.</em>)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 12px; font-weight:600; color:var(--text-muted); font-size:0.9rem;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Indispensable : Rédige une transition à la fin de chaque grand axe pour introduire le suivant.
+                        </p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge">4</div>
+                    <div class="step-content">
+                        <div class="step-title">La Conclusion <span style="font-size:0.9rem; font-weight: normal; opacity: 0.8;">(Un seul paragraphe)</span></div>
+                        <p class="step-text">Elle scelle ton devoir et ouvre la réflexion :</p>
+                        <ul class="step-list">
+                            <li><strong>Le Bilan :</strong> Résume les grandes idées de tes axes sans faire de simple répétition.</li>
+                            <li><strong>La Réponse :</strong> Donne une réponse définitive à ta problématique initiale.</li>
+                            <li><strong>L'Ouverture :</strong> Fais un parallèle judicieux avec un autre texte, un autre auteur du même mouvement, ou une autre forme d'art (peinture, cinéma) abordant le thème.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    `).join('')}
-  `;
-}
 
-function goToTab(tabName) {
-  searchInput.value = '';
-  searchResults.classList.remove('active');
-  tabs.forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
-  document.querySelectorAll('.section').forEach(s => {
-    if (s.id === 'search-results') return;
-    s.classList.toggle('active', s.id === 'tab-' + tabName);
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+        <div id="metho-dissertation" class="content-view">
+            <div class="view-header">
+                <h1 class="view-title" style="color: #f59e0b;"><i class="fa-solid fa-scroll"></i> Méthodologie de la Dissertation</h1>
+                <p class="view-description">Répondre à une problématique sur l'œuvre au programme et son parcours associé en t'appuyant sur tes lectures.</p>
+            </div>
+            <div class="stepper">
+                <div class="step-item">
+                    <div class="step-badge" style="background-color: #f59e0b; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">1</div>
+                    <div class="step-content">
+                        <div class="step-title">
+                            <span>Le Travail au Brouillon</span>
+                            <span class="step-time" style="background-color:#fef3c7; color:#d97706;"><i class="fa-regular fa-clock"></i> 1h à 1h30</span>
+                        </div>
+                        <p class="step-text">Prendre le temps d'analyser le sujet pour éviter le hors-sujet :</p>
+                        <ul class="step-list">
+                            <li><strong>Analyse du sujet :</strong> Entoure et définis les mots-clés du sujet. Cherche leurs synonymes et les implications cachées.</li>
+                            <li><strong>Problématique :</strong> Reformule le sujet sous la forme d'un débat ou d'une question globale.</li>
+                            <li><strong>Le Choix du Plan :</strong>
+                                <div style="margin-top:6px; padding-left:12px; border-left: 2px solid var(--border-color);">
+                                    <p><em>• Plan dialectique :</em> Thèse (Oui, on peut dire que...) / Antithèse (Mais il faut nuancer...) / Synthèse (Dépasser l'opposition).</p>
+                                    <p><em>• Plan thématique :</em> Si le sujet n'induit pas de débat direct, explore 3 facettes du problème (ex: I. Fonction lyrique, II. Fonction engagée, III. Fonction esthétique de la poésie).</p>
+                                </div>
+                            </li>
+                            <li><strong>Recherche d'exemples :</strong> Pour chaque sous-partie, associe une scène précise, un personnage ou une citation de l'œuvre étudiée, ainsi qu'un exemple issu du parcours associé.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge" style="background-color: #f59e0b; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">2</div>
+                    <div class="step-content">
+                        <div class="step-title">L'Introduction <span style="font-size:0.9rem; font-weight: normal; opacity: 0.8;">(Un seul paragraphe)</span></div>
+                        <p class="step-text">Éléments obligatoires dans l'ordre :</p>
+                        <ul class="step-list">
+                            <li><strong>L'Amorce :</strong> Contextualise en évoquant le genre concerné ou le thème du parcours associé.</li>
+                            <li><strong>La Présentation :</strong> Mentionne l'auteur et l'œuvre au programme (titre souligné).</li>
+                            <li><strong>La Citation du sujet :</strong> Recopie le sujet (ou résume-le s'il est trop long).</li>
+                            <li><strong>La Problématique :</strong> Ta reformulation claire qui guidera la dissertation.</li>
+                            <li><strong>L'Annonce du plan :</strong> Expose tes grandes parties de façon fluide.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge" style="background-color: #f59e0b; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Le Développement</div>
+                        <p class="step-text">Structure visuelle identique au commentaire (saut de ligne entre les grands axes, transitions rédigées).</p>
+                        <ul class="step-list">
+                            <li><strong>Un paragraphe = Un argument :</strong> Chaque sous-partie défend un seul argument logique.</li>
+                            <li><strong>Preuve par l'exemple :</strong> Tu dois impérativement illustrer ton argument par un exemple précis de l'œuvre (scène clé, citation apprise, analyse d'une action).</li>
+                            <li><strong>Lien au sujet :</strong> Explique rigoureusement en quoi cet exemple répond au sujet posé et prouve ton point de vue.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge" style="background-color: #f59e0b; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">4</div>
+                    <div class="step-content">
+                        <div class="step-title">La Conclusion <span style="font-size:0.9rem; font-weight: normal; opacity: 0.8;">(Un seul paragraphe)</span></div>
+                        <p class="step-text">La fermeture synthétique du débat :</p>
+                        <ul class="step-list">
+                            <li><strong>Le Bilan :</strong> Synthétise ta démonstration générale sans répéter mot à mot.</li>
+                            <li><strong>La Réponse finale :</strong> Tranche la question posée de manière nette et nuancée.</li>
+                            <li><strong>L'Ouverture :</strong> Élargis la réflexion vers un autre siècle, un autre genre, ou un enjeu moderne et universel relié au sujet.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-let searchTimeout;
-searchInput.addEventListener('input', e => {
-  clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(() => performSearch(e.target.value), 200);
-});
+    </main>
 
-// Open all accordions by default
-document.querySelectorAll('.grammar-block-header').forEach(h => toggleBlock(h));
-</script>
+    <script>
+        // LOGIQUE DU QUIZ FLASH (Plus de 50 QCM)
+        const quizData = [
+            // FIGURES DE STYLE (Pièges)
+            { q: "« Va, je ne te hais point » est un exemple célèbre de :", opts: ["Euphémisme", "Litote", "Antiphrase", "Prétérition"], a: 1 },
+            { q: "Quelle figure rapproche deux mots de sens contraire dans un même groupe nominal (ex: « une obscure clarté ») ?", opts: ["Antithèse", "Chiasme", "Oxymore", "Paradoxe"], a: 2 },
+            { q: "« Il nous a quittés » pour dire « il est mort » est :", opts: ["Une litote", "Un euphémisme", "Une périphrase", "Une métonymie"], a: 1 },
+            { q: "Laquelle de ces figures crée un effet miroir croisé de type ABBA ?", opts: ["Parallélisme", "Zeugma", "Anaphore", "Chiasme"], a: 3 },
+            { q: "« Boire un verre » est une figure de style qui remplace le contenu par le contenant. C'est :", opts: ["Une synecdoque", "Une périphrase", "Une métonymie", "Une allégorie"], a: 2 },
+            { q: "Donner des traits humains à un objet ou un animal s'appelle :", opts: ["Une allégorie", "Une prosopopée", "Une personnification", "Une métaphore filée"], a: 2 },
+            { q: "Rendre concret ce qui est abstrait (ex: La Mort représentée par la faucheuse) est :", opts: ["Une allégorie", "Une personnification", "Un symbole", "Une comparaison"], a: 0 },
+            { q: "« Paris outragé ! Paris brisé ! Paris martyrisé ! » utilise principalement :", opts: ["Une épiphore", "Une anaphore", "Une paronomase", "Un polyptote"], a: 1 },
+            { q: "« Je me meurs, je suis mort, je suis enterré » est une :", opts: ["Accumulation", "Énumération", "Gradation", "Hyperbole simple"], a: 2 },
+            { q: "Si je dis « C'est du joli ! » face à un désastre, j'utilise :", opts: ["Une antiphrase", "Une litote", "Un oxymore", "Une hyperbole"], a: 0 },
+            
+            // MOUVEMENTS LITTÉRAIRES
+            { q: "Quel mouvement du XVIIe siècle se caractérise par l'instabilité, l'illusion et la démesure ?", opts: ["Le Classicisme", "Le Romantisme", "Le Baroque", "La Pléiade"], a: 2 },
+            { q: "La règle des trois unités (temps, lieu, action) est la base du :", opts: ["Baroque", "Classicisme", "Naturalisme", "Théâtre de l'absurde"], a: 1 },
+            { q: "L'éloge de la raison contre le fanatisme religieux correspond :", opts: ["À l'Humanisme", "Aux Lumières", "Au Romantisme", "Au Symbolisme"], a: 1 },
+            { q: "Quel mouvement littéraire revendique l'omniprésence du « Je » et l'expression de la mélancolie ?", opts: ["Le Parnasse", "Le Romantisme", "Le Surréalisme", "L'Humanisme"], a: 1 },
+            { q: "Le roman d'Émile Zola se basant sur les lois de l'hérédité appartient au :", opts: ["Réalisme", "Symbolisme", "Naturalisme", "Nouveau Roman"], a: 2 },
+            { q: "Quel mouvement poétique du XIXe siècle prône « l'Art pour l'Art » et la perfection de la forme ?", opts: ["Le Parnasse", "Le Symbolisme", "Le Surréalisme", "La Pléiade"], a: 0 },
+            { q: "Le mouvement explorant l'inconscient, le rêve et refusant parfois la ponctuation est :", opts: ["L'Absurde", "Le Surréalisme", "Le Nouveau Roman", "Le Symbolisme"], a: 1 },
+            { q: "Le théâtre mettant en scène l'incommunicabilité et le vide de l'existence au XXe siècle est :", opts: ["Le théâtre romantique", "Le théâtre de l'Absurde", "Le théâtre classique", "Le vaudeville"], a: 1 },
+            { q: "Ronsard et Du Bellay sont les figures de proue de :", opts: ["La Pléiade", "L'Humanisme", "La préciosité", "L'école de Lyon"], a: 0 },
+            { q: "La volonté de représenter la société de façon objective (Balzac, Flaubert) définit :", opts: ["Le Romantisme", "Le Parnasse", "Le Réalisme", "Le Naturalisme"], a: 2 },
+            { q: "Lequel de ces thèmes n'appartient PAS au registre Humaniste ?", opts: ["La soif de connaissance", "La prédestination tragique", "La pédagogie", "La confiance en l'homme"], a: 1 },
+            { q: "Le « mal du siècle » est une expression associée au :", opts: ["Symbolisme", "Romantisme", "Baroque", "Nouveau Roman"], a: 1 },
+            { q: "Les synesthésies (correspondances entre les sens) sont au cœur du :", opts: ["Parnasse", "Symbolisme", "Classicisme", "Surréalisme"], a: 1 },
+            { q: "L'écriture automatique est un procédé inventé par :", opts: ["Les Symbolistes", "Les Surréalistes", "Les Romantiques", "Les Absurdistes"], a: 1 },
+            { q: "La déconstruction de l'intrigue et l'effacement du personnage traditionnel (XXe siècle) caractérise :", opts: ["Le Nouveau Roman", "Le Naturalisme", "Le Réalisme magique", "L'Oulipo"], a: 0 },
+
+            // REGISTRES LITTÉRAIRES
+            { q: "Quel registre cherche à provoquer la compassion et la pitié du lecteur ?", opts: ["Le lyrique", "Le tragique", "Le pathétique", "L'élégiaque"], a: 2 },
+            { q: "Le registre mettant en scène un personnage écrasé par la fatalité sans échappatoire est :", opts: ["Le pathétique", "Le dramatique", "Le tragique", "L'épique"], a: 2 },
+            { q: "Quel registre se caractérise par l'affrontement verbal, souvent agressif et indigné ?", opts: ["Le satirique", "L'ironique", "Le polémique", "Le délibératif"], a: 2 },
+            { q: "Dénoncer des défauts en les moquant par l'humour noir ou la caricature est le but du registre :", opts: ["Comique", "Satirique", "Polémique", "Burlesque"], a: 1 },
+            { q: "Un texte glorifiant les exploits surhumains d'un héros dans une bataille est de registre :", opts: ["Lyrique", "Dramatique", "Épique", "Fantastique"], a: 2 },
+            { q: "L'expression des sentiments intimes (amour, fuite du temps) correspond au registre :", opts: ["Pathétique", "Lyrique", "Élégiaque", "Romantique"], a: 1 },
+            { q: "Lequel n'est PAS un procédé typique du registre comique ?", opts: ["Le quiproquo", "Le comique de répétition", "La catharsis", "L'absurde"], a: 2 },
+            { q: "L'irruption du surnaturel dans un cadre réaliste provoquant la peur ou l'hésitation est le registre :", opts: ["Merveilleux", "Fantastique", "Étrange", "Gothique"], a: 1 },
+            { q: "Quel registre est souvent lié à l'utilisation massive de questions rhétoriques et d'hyperboles ?", opts: ["Le polémique", "Le lyrique", "Le didactique", "Le fantastique"], a: 0 },
+            { q: "Le registre qui a pour but principal d'enseigner ou d'informer s'appelle :", opts: ["L'épidictique", "Le didactique", "Le délibératif", "L'injonctif"], a: 1 },
+
+            // GENRES ET STRUCTURES
+            { q: "Au théâtre, une réplique très longue s'appelle :", opts: ["Un monologue", "Une tirade", "Une aparté", "Une stichomythie"], a: 1 },
+            { q: "Un échange très rapide de répliques courtes au théâtre est une :", opts: ["Stichomythie", "Didascalie", "Pantomime", "Quiproquo"], a: 0 },
+            { q: "Les indications scéniques écrites par l'auteur (non prononcées) s'appellent :", opts: ["Les apartés", "Les actes", "Les didascalies", "Les scénographies"], a: 2 },
+            { q: "En poésie, un vers de 12 syllabes est un :", opts: ["Décasyllabe", "Octosyllabe", "Alexandrin", "Sonnet"], a: 2 },
+            { q: "La coupe au milieu d'un alexandrin (6/6) sépare le vers en deux :", opts: ["Césures", "Hémistiches", "Rejets", "Strophes"], a: 1 },
+            { q: "Lorsqu'une phrase se termine au vers suivant, créant un effet de fluidité, c'est un :", opts: ["Rejet", "Contre-rejet", "Enjambement", "Hiatus"], a: 2 },
+            { q: "Un poème fixe composé de 2 quatrains et 2 tercets s'appelle :", opts: ["Une ode", "Un sonnet", "Une ballade", "Un rondeau"], a: 1 },
+            { q: "Dans un roman, si le narrateur sait tout du passé et des pensées de tous les personnages, la focale est :", opts: ["Interne", "Externe", "Zéro (Omnisciente)", "Subjective"], a: 2 },
+            { q: "Dans un roman, accélérer le temps en sautant plusieurs années est :", opts: ["Une ellipse", "Un sommaire", "Une pause", "Une scène"], a: 0 },
+            { q: "Un texte argumentatif qui critique en utilisant une histoire fictive (comme L'Ingénu) est un :", opts: ["Essai", "Conte philosophique", "Pamphlet", "Plaidoyer"], a: 1 },
+
+            // GRAMMAIRE ET METHODE (Pièges de l'épreuve)
+            { q: "Dans la phrase « Le chat que je vois », 'que' est :", opts: ["Une conjonction de subordination", "Un pronom relatif", "Un pronom interrogatif", "Un adverbe"], a: 1 },
+            { q: "Lequel de ces temps exprime une action de premier plan, soudaine, dans un récit au passé ?", opts: ["L'imparfait", "Le plus-que-parfait", "Le passé simple", "Le conditionnel"], a: 2 },
+            { q: "Une proposition subordonnée conjonctive introduite par « bien que » exprime :", opts: ["La cause", "La conséquence", "La condition", "La concession"], a: 3 },
+            { q: "Dans l'épreuve du commentaire, que signifie la règle d'or 'AEI' ?", opts: ["Auteur, Époque, Intérêt", "Affirmation, Exemple, Interprétation", "Analyse, Explication, Introduction", "Attente, Effet, Interrogation"], a: 1 },
+            { q: "À l'écrit (dissertation/commentaire), les titres d'œuvres (romans, pièces) doivent toujours être :", opts: ["Entre guillemets", "Soulignés", "En gras", "En majuscules"], a: 1 },
+            { q: "Les titres de poèmes à l'intérieur d'un recueil doivent être :", opts: ["Soulignés", "Entre guillemets", "En italique", "En majuscules"], a: 1 },
+            { q: "L'interrogation qui n'attend pas de réponse (pour convaincre) est une :", opts: ["Interrogation totale", "Interrogation partielle", "Question rhétorique", "Question indirecte"], a: 2 }
+        ];
+
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let quizQuestions = [];
+        let correctQuizQuestions = []; // Stocke les ID des bonnes réponses trouvées
+        const totalProgressionItems = 7 + quizData.length; // 7 cases + 52 questions = 59 points
+
+        function initQuiz() {
+            // On ajoute "originalIdx" pour se souvenir de la question exacte même après mélange
+            quizQuestions = quizData.map((q, index) => ({ ...q, originalIdx: index }));
+            quizQuestions.sort(() => Math.random() - 0.5);
+            currentQuizIndex = 0;
+            quizScore = 0;
+            
+            document.getElementById('quiz-end-area').style.display = 'none';
+            document.getElementById('quiz-play-area').style.display = 'block';
+            
+            updateQuizUI();
+            loadQuizQuestion();
+        }
+
+	function loadQuizQuestion() {
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-counter').textContent = `Question ${currentQuizIndex + 1}/${quizQuestions.length}`;
+            document.getElementById('quiz-question-text').textContent = q.q;
+            
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+            document.getElementById('quiz-next-btn').style.display = 'none';
+
+            q.opts.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-btn';
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-solid fa-circle" style="color: transparent; font-size: 0.8rem;"></i>`;
+                // On passe l'index original à la fonction !
+                btn.onclick = () => selectQuizAnswer(index, btn, q.a, q.originalIdx);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectQuizAnswer(selectedIndex, btnElement, correctIndex, originalIdx) {
+            const buttons = document.querySelectorAll('#quiz-options-container .quiz-btn');
+            buttons.forEach(b => b.disabled = true);
+
+            if (selectedIndex === correctIndex) {
+                btnElement.classList.add('correct');
+                btnElement.querySelector('i').className = "fa-solid fa-check";
+                btnElement.querySelector('i').style.color = "inherit";
+                quizScore++;
+                
+                // NOUVEAU : Si la question n'a jamais été trouvée avant, on la sauvegarde
+                if (!correctQuizQuestions.includes(originalIdx)) {
+                    correctQuizQuestions.push(originalIdx);
+                    saveAndRefreshProgression();
+                }
+            } else {
+                btnElement.classList.add('wrong');
+                btnElement.querySelector('i').className = "fa-solid fa-xmark";
+                btnElement.querySelector('i').style.color = "inherit";
+                
+                buttons[correctIndex].classList.add('correct');
+                buttons[correctIndex].querySelector('i').className = "fa-solid fa-check";
+                buttons[correctIndex].querySelector('i').style.color = "inherit";
+            }
+            
+            updateQuizUI();
+            document.getElementById('quiz-next-btn').style.display = 'block';
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < quizQuestions.length) {
+                loadQuizQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function updateQuizUI() {
+            document.getElementById('quiz-score-badge').textContent = `Score : ${quizScore}`;
+        }
+
+        function endQuiz() {
+            document.getElementById('quiz-play-area').style.display = 'none';
+            const endArea = document.getElementById('quiz-end-area');
+            endArea.style.display = 'block';
+            document.getElementById('final-score').textContent = `${quizScore} / ${quizQuestions.length}`;
+        }
+
+        // LE RESTE DE TES SCRIPTS (SwitchTab, DarkMode, Flashcards, Search)
+	// LOGIQUE DE PROGRESSION & SAUVEGARDE
+        function toggleProgression() {
+            // Ouvre ou ferme le menu des cases à cocher
+            const checklist = document.getElementById('progression-checklist');
+            checklist.classList.toggle('open');
+        }
+
+        function updateProgressionUI() {
+            // Calcul du pourcentage
+            const checkedCount = document.querySelectorAll('.prog-cb:checked').length;
+            const quizCount = correctQuizQuestions.length;
+            const totalEarned = checkedCount + quizCount;
+            
+            const percent = Math.round((totalEarned / totalProgressionItems) * 100);
+            
+            // Mise à jour graphique
+            document.getElementById('progression-percent').textContent = `${percent}%`;
+            document.getElementById('progression-bar').style.width = `${percent}%`;
+        }
+
+        function saveAndRefreshProgression() {
+            // Enregistre dans le navigateur (Cookies / LocalStorage)
+            const checkedIds = Array.from(document.querySelectorAll('.prog-cb:checked')).map(cb => cb.getAttribute('data-id'));
+            localStorage.setItem('bac_checked_boxes', JSON.stringify(checkedIds));
+            localStorage.setItem('bac_correct_quiz', JSON.stringify(correctQuizQuestions));
+            updateProgressionUI();
+        }
+
+        function loadSavedData() {
+            // Récupère les données au chargement de la page
+            const savedBoxes = localStorage.getItem('bac_checked_boxes');
+            if (savedBoxes) {
+                const checkedIds = JSON.parse(savedBoxes);
+                document.querySelectorAll('.prog-cb').forEach(cb => {
+                    if (checkedIds.includes(cb.getAttribute('data-id'))) cb.checked = true;
+                });
+            }
+            
+            const savedQuiz = localStorage.getItem('bac_correct_quiz');
+            if (savedQuiz) {
+                correctQuizQuestions = JSON.parse(savedQuiz);
+            }
+            
+            updateProgressionUI();
+        }
+        function switchTab(tabId) {
+            const views = document.querySelectorAll('.content-view');
+            views.forEach(v => v.classList.remove('active'));
+
+            const activeView = document.getElementById(tabId);
+            if (activeView) {
+                activeView.classList.add('active');
+            }
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                item.parentElement.style.backgroundColor = "transparent"; // Reset background of parent li if applied
+            });
+
+            const currentElement = event.currentTarget;
+            currentElement.classList.add('active');
+            
+            // Si c'est le quiz, initialiser au besoin
+            if(tabId === 'quiz' && currentQuizIndex === 0 && quizScore === 0) {
+                initQuiz();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.className = 'dark';
+            document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+        }
+
+        function toggleFlashcards() {
+            const isChecked = document.getElementById('flashcardToggle').checked;
+            if (isChecked) {
+                document.body.classList.add('flashcard-mode');
+                document.querySelectorAll('.card').forEach(c => c.classList.remove('revealed'));
+            } else {
+                document.body.classList.remove('flashcard-mode');
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const searchKeywords = card.getAttribute('data-search') || '';
+                const cardBack = card.querySelector('.card-back');
+                const cardTitle = cardBack && cardBack.querySelector('.card-title') ? cardBack.querySelector('.card-title').textContent.toLowerCase() : '';
+                const cardText = cardBack ? cardBack.textContent.toLowerCase() : '';
+
+                if (query === '') {
+                    card.style.display = 'block';
+                } else if (searchKeywords.includes(query) || cardTitle.includes(query) || cardText.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialisation des cartes 3D
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const titleElement = card.querySelector('.card-title');
+                let titleText = 'Carte';
+                if (titleElement) {
+                    const clone = titleElement.cloneNode(true);
+                    const spans = clone.querySelectorAll('span');
+                    spans.forEach(s => s.remove());
+                    titleText = clone.textContent.trim();
+                }
+                const originalContent = card.innerHTML;
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <i class="fa-solid fa-arrows-rotate" style="font-size: 2rem; margin-bottom: 16px; opacity: 0.6;"></i>
+                            <h3 class="card-title" style="font-size: 1.5rem; text-align: center; margin: 0;">${titleText}</h3>
+                            <span style="font-size: 0.85rem; opacity: 0.7; margin-top: 16px; font-weight: 500;">Cliquez pour retourner</span>
+                        </div>
+                        <div class="card-back">${originalContent}</div>
+                    </div>
+                `;
+                card.addEventListener('click', function() {
+                    if (document.body.classList.contains('flashcard-mode')) {
+                        this.classList.toggle('revealed');
+                    }
+                });
+            });
+
+	    // Récupérer la progression sauvegardée
+            loadSavedData();
+            // Lancer le quiz en tâche de fond pour qu'il soit prêt
+            initQuiz();
+        });
+    </script>
 </body>
 </html>
